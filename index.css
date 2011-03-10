@@ -1,0 +1,180 @@
+body { 
+	font: normal 12px Helvetica, sans-serif;
+	background: rgb(237, 237, 236);
+	margin: 50px 0;
+	padding: 0;
+	overflow-y: scroll;
+}
+
+section, header, article, footer {
+	display: block;
+}
+
+input {
+	padding: 3px;
+	border: 1px solid #999;
+	cursor: pointer;
+}
+
+button {
+	background-color: #FFF;
+	color: #5C5C5C;
+	padding: 5px 15px;
+	cursor: pointer;
+	font-weight: bold;
+
+	border: 1px solid #999;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	
+	box-shadow: 0 0 3px #999;
+	-o-box-shadow: 0 0 3px #999;
+	-webkit-box-shadow: 0 0 3px #999;
+	-moz-box-shadow: 0 0 3px #999;
+}
+
+button:hover {
+	background-color: #F9F9F9;
+	border: 1px solid #666;
+	color: #333;
+	
+	box-shadow: inset 0 1px 5px #CBE6F2, inset 0 -15px #F9F9F9;
+	-o-box-shadow: inset 0 1px 5px #CBE6F2, inset 0 -15px #F9F9F9;
+	-webkit-box-shadow: inset 0 1px 5px #CBE6F2, inset 0 -15px #F9F9F9;
+	-moz-box-shadow: inset 0 1px 5px #CBE6F2, inset 0 -15px #F9F9F9;
+}
+
+button.disabled {
+	background-color: #F9F9F9;
+	color: #CCC;
+	border: 1px solid #999;
+	cursor: auto;
+	
+	box-shadow: none;
+	-o-box-shadow: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+}
+
+form.container {
+	margin: 0px auto;
+	width: 882px;
+}
+
+div.step {
+	width: 250px;
+	height: 300px;
+	float: left;
+	margin: 20px;
+	
+	background: #FFF;
+	padding: 0px;
+	overflow: hidden;
+	
+	border: 2px solid #666;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	
+	box-shadow: 0px 0px 10px #999;
+	-o-box-shadow: 0px 0px 10px #999;
+	-webkit-box-shadow: 0px 0px 10px #999;
+	-moz-box-shadow: 0px 0px 10px #999;
+}
+
+div.step.green {
+	box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #BEE6C0;
+	-o-box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #BEE6C0;
+	-webkit-box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #BEE6C0;
+	-moz-box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #BEE6C0;
+}
+
+div.step.red {
+	box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #F3D8D8;
+	-o-box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #F3D8D8;
+	-webkit-box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #F3D8D8;
+	-moz-box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #F3D8D8;
+}
+
+/*
+div.step:hover {
+	box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #F0ED95;
+	-o-box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #F0ED95;
+	-webkit-box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #F0ED95;
+	-moz-box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #F0ED95;
+}
+*/
+
+div.step > div.top {
+	height: 50px;
+	overflow: hidden;
+	box-shadow: 0 0px 4px #666;
+	-o-box-shadow: 0 0px 4px #666;
+	-webkit-box-shadow: 0 0px 4px #666;
+	-moz-box-shadow: 0 0px 4px #666;
+	
+	line-height: 50px;
+	font-size: 20px;
+	padding-left: 10px;
+	color: #333;
+}
+
+div.step > div.top > sup {
+	font-size: 85px;
+	font-weight: bold;
+	line-height: 50px;
+	position: relative;
+	margin-right: 10px;
+	float: right;
+	color: #DEDEDE;
+	text-shadow: 0px 1px 1px #666;
+}
+
+div.step > div.bottom {
+	margin: 15px;
+}
+
+div.step > div.bottom > h2 {
+	font-size: 14px;
+	line-height: 16px;
+	color: #666;
+	margin-bottom: 10px;
+}
+
+div.step > div.bottom > h2 > img.loading {
+	position: relative;
+	float: right;
+}
+
+div.step > div.bottom > p > label {
+	display: block;
+	margin: 5px 10px 5px 0px;
+	width: 35px;
+	float: left;
+}
+
+div.step > div.bottom > p > input {
+	margin: 0px 5px;
+	vertical-align: middle;
+}
+
+/*
+div.step > div.bottom > p > input[type="file"] {
+	z-index: 2;
+	opacity: 0;
+	position: relative;
+	
+}
+
+div.step > div.bottom > p > span.filemask {
+	display: inline;
+	position: absolute;
+	padding: 3px;
+	border: 1px solid #999;
+	background-color: #FFF;
+	width: 160px;
+	height: 16px;
+	z-index: 1;
+	cursor: pointer;
+	left: 325px;
+}
+*/
