@@ -22,16 +22,16 @@
 				});
 			},
 			
-			handleFile: function(options){
+			handleFiles: function(options){
 				return this.each( function(){
 					if(options.attach){ $(this).data('files', options.evt.dataTransfer.files); }
-					console.info($(this).data());
 					if(callback){ callback.apply($(this), [options.evt]); }
 				});
 			}
 		};
 		
 		parseFiles = function(files){
+			// currently not used
 			return files;
 		};
 		
@@ -40,7 +40,7 @@
 		} else if( typeof method === 'object' || ! method ){
 			return methods.init.apply( this, arguments );
 		} else {
-			console.info('Method ' +  method + ' does not exist');
+			$.error('Method ' +  method + ' does not exist on jQuery.dragdrop');
 		}
 	};
 
