@@ -4,6 +4,7 @@ body {
 	margin: 50px 0;
 	padding: 0;
 	overflow-y: scroll;
+	height: 100%;
 }
 
 section, header, article, footer {
@@ -56,6 +57,14 @@ button.disabled {
 	-moz-box-shadow: none;
 }
 
+div.fileCatch {
+	height: 100%;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	z-index: 500;
+}
+
 form.container {
 	margin: 0px auto;
 	width: 882px;
@@ -66,10 +75,12 @@ div.step {
 	height: 300px;
 	float: left;
 	margin: 20px;
+	z-index: 1000;
 	
 	background: #FFF;
 	padding: 0px;
 	overflow: hidden;
+	position: relative;
 	
 	border: 2px solid #666;
 	border-radius: 5px;
@@ -81,6 +92,7 @@ div.step {
 	-moz-box-shadow: 0px 0px 10px #999;
 }
 
+/*
 div.step.green {
 	box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #BEE6C0;
 	-o-box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #BEE6C0;
@@ -94,15 +106,15 @@ div.step.red {
 	-webkit-box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #F3D8D8;
 	-moz-box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #F3D8D8;
 }
+*/
 
-/*
 div.step:hover {
 	box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #F0ED95;
 	-o-box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #F0ED95;
 	-webkit-box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #F0ED95;
 	-moz-box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #F0ED95;
 }
-*/
+
 
 div.step > div.top {
 	height: 50px;
@@ -143,6 +155,36 @@ div.step > div.bottom > h2 {
 div.step > div.bottom > h2 > img.loading {
 	position: relative;
 	float: right;
+}
+
+div.step > div.bottom > p.status {
+	background-color: #F0ED95;
+	margin: 15px -15px 10px -15px;
+	padding: 7px 15px;
+	line-height: 16px;
+	color: #333;
+	
+	box-shadow: 0 0px 4px #666;
+	-o-box-shadow: 0 0px 4px #666;
+	-webkit-box-shadow: 0 0px 4px #666;
+	-moz-box-shadow: 0 0px 4px #666;
+}
+
+div.step > div.bottom > p.status > img {
+	margin-right: 10px;
+	vertical-align: middle;
+}
+
+div.step > div.bottom > p.status.error {
+	background-color: #F3D8D8;
+}
+
+div.step > div.bottom > p.status.success {
+	background-color: #BEE6C0;
+}
+
+div.step > div.bottom > p.status.success > img {
+	cursor: pointer;
 }
 
 div.step > div.bottom > p > label {

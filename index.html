@@ -2,22 +2,24 @@
 <html>
 <head>
 	<title>Zip Deploy HTML5</title>
-	<!--
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
 	<script src="index.js"></script>
-	//-->
 	<link type="text/css" href="reset.css" rel="stylesheet" />
 	<link type="text/css" href="index.css" rel="stylesheet" />
 </head>
 <body>
+	<div class="fileCatch"></div>
 	<form class="container">
-		<div class="step">
+		<div class="step drop">
 			<div class="top">Upload<sup>1</sup></div>
 			<div class="bottom">
-				<h2>Drag &amp; Drop File <img class="loading" src="loading.gif" /></h2>
+				<h2>Drag &amp; Drop File <img class="loading" src="images/loading.gif" /></h2>
+				<p class="status"><img src="images/file_16.png" />Ready...</p>
+				<p><button name="upload" type="button" style="float: right; margin-top: 15px;" class="disabled" disabled>Upload</button></p>
 			</div>
 		</div>
 		
-		<div class="step green">
+		<div class="step green nodrop">
 			<div class="top">Select &amp; Target<sup>2</sup></div>
 			<div class="bottom">
 				<h2>Select File</h2>
@@ -25,7 +27,7 @@
 			</div>
 		</div>
 		
-		<div class="step red">
+		<div class="step red nodrop">
 			<div class="top">Purge &amp; Extract<sup>3</sup></div>
 			<div class="bottom">
 				<h2>Extract File</h2>
