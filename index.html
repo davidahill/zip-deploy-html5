@@ -16,7 +16,10 @@
 			<div class="bottom">
 				<h2>Drag &amp; Drop File <img class="loading" src="images/loading.gif" /></h2>
 				<p class="status"><img src="images/file_16.png" />Ready...</p>
-				<p><button name="upload" type="button" style="float: right; margin-top: 15px;" class="disabled" disabled>Upload</button></p>
+                <p class="or"><sup>OR</sup></p>
+                <h2>Browse Computer</h2>
+                <p class="browse"><input type="file" name="file" /><sup><img src="images/file_16.png" />Click to browse.</sup></p>
+				<p style="text-align: right; margin-top: 15px;"><button name="upload" type="button" class="disabled" disabled>Upload</button></p>
 			</div>
 		</div>
 		
@@ -24,15 +27,21 @@
 			<div class="top">Select &amp; Target<sup>2</sup></div>
 			<div class="bottom">
 				<h2>Select File</h2>
-				<p><button name="browse" type="button">Browse</button></p>
+                <p>Foo <button name="select" type="button">Browse</button></p>
+                <p class="or"><sup>OR</sup></p>
+                <h2>Select Target</h2>
+				<p>Bar <button name="target" type="button">Browse</button></p>
 			</div>
 		</div>
 		
 		<div class="step nodrop">
 			<div class="top">Purge &amp; Extract<sup>3</sup></div>
 			<div class="bottom">
-				<h2>Extract File</h2>
-				<p><button name="extract" type="button" class="disabled" disabled>Extract</button></p>
+				<h2>Purge <img class="loading" src="images/loading.gif" /></h2>
+                <p style="text-align: center;"><button name="purge" type="button" style="" class="disabled" disabled>Purge Directory</button></p>
+                <p class="or"><sup style="left: 68px;">AND / OR</sup></p>
+                <h2>Extract <img class="loading" src="images/loading.gif" /></h2>
+				<p style="text-align: center;"><button name="extract" type="button" style="" class="disabled" disabled>Extract Files</button></p>
 			</div>
 		</div>
 		

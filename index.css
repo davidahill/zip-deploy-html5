@@ -77,9 +77,9 @@ div.step {
 	margin: 20px;
 	z-index: 1000;
 	
-	background: #FFF;
 	padding: 0px;
 	overflow: hidden;
+	background: #FFF;
 	position: relative;
 	
 	border: 2px solid #666;
@@ -155,6 +155,10 @@ div.step > div.bottom > h2 > img.loading {
 	float: right;
 }
 
+div.step > div.bottom > p {
+    clear: both;   
+}
+
 div.step > div.bottom > p.status {
 	background-color: #F0ED95;
 	margin: 15px -15px 10px -15px;
@@ -185,6 +189,56 @@ div.step > div.bottom > p.status.success > img {
 	cursor: pointer;
 }
 
+div.step > div.bottom > p.or {
+    margin: 20px;
+    border-top: 1px solid #CCC;
+    position: relative;
+}
+
+div.step > div.bottom > p.or > sup {
+    font-size: 8px;
+    font-weight: bold;
+    position: absolute;
+    top: -5px;
+    left: 79px;
+    background-color: #FFF;
+    padding: 0px 5px;
+    color: #666;
+}
+
+div.step > div.bottom > p.browse {
+    background-color: #F0ED95;
+	margin: 15px -15px 10px -15px;
+    padding: 0px 15px;
+	line-height: 30px;
+	color: #333;
+	
+	box-shadow: 0 0px 4px #666;
+	-o-box-shadow: 0 0px 4px #666;
+	-webkit-box-shadow: 0 0px 4px #666;
+	-moz-box-shadow: 0 0px 4px #666;
+}
+
+div.step > div.bottom > p.browse > sup {
+    position: absolute;
+    left: 15px;
+    z-index: 1005;
+    cursor: pointer;
+}
+
+div.step > div.bottom > p.browse > sup > img {
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+div.step > div.bottom > p.browse > input[type="file"] {
+    margin: 0px -15px 0px -15px;
+    position: relaitve;
+    opacity: 0;
+    z-index: 1010;
+}
+
+/*
 div.step > div.bottom > p > label {
 	display: block;
 	margin: 5px 10px 5px 0px;
@@ -196,6 +250,7 @@ div.step > div.bottom > p > input {
 	margin: 0px 5px;
 	vertical-align: middle;
 }
+*/
 
 /*
 div.step > div.bottom > p > input[type="file"] {
