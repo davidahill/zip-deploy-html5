@@ -1,8 +1,8 @@
 $(function() {	
 	
-	$('div.fileCatch, div.step.nodrop').dragDrop({dropEffect: false});
+	$('div.fileCatch, div.step.nodrop').fileDragDrop({dropEffect: false});
 	
-	$('div.step.drop').dragDrop('init', {types: ['dragover']}, function(e){
+	$('div.step.drop').fileDragDrop('init', {types: ['dragover']}, function(e){
 		if($(this).data('files')){
 			e.dataTransfer.dropEffect = 'none';
 			$(this).find('div.bottom p.status').addClass('error').html( function(){
@@ -16,7 +16,7 @@ $(function() {
 		}
 	});
 	
-	$('div.step.drop').dragDrop('init', {types: ['dragleave']}, function(e){
+	$('div.step.drop').fileDragDrop('init', {types: ['dragleave']}, function(e){
 		if(!$(this).data('files')){
 			$(this).find('div.bottom p.status').fileStatus('reset');
 		} else {
@@ -31,7 +31,7 @@ $(function() {
 		}
 	});
 	
-	$('div.step.drop').dragDrop('init', {types: ['drop']}, function(e){
+	$('div.step.drop').fileDragDrop('init', {types: ['drop']}, function(e){
 		$(this).dragDrop('handleFiles', {attach: true, evt: e}, function(e){
 			$(this).find('div.bottom p.status').fileStatus('info');
 		});
@@ -100,7 +100,7 @@ $(function() {
 			size = roundNumber(size / 1024, 2) + ' Kb';
 		} else {
 			size = roundNumber(size) + ' bytes';
-		};
+		}
 		return size;
 	}
 	
