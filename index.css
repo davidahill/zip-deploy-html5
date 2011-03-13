@@ -107,10 +107,10 @@ div.step.red {
 }
 
 div.step:hover {
-	box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #F0ED95;
-	-o-box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #F0ED95;
-	-webkit-box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #F0ED95;
-	-moz-box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #F0ED95;
+	box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #CBE6F2;
+	-o-box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #CBE6F2;
+	-webkit-box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #CBE6F2;
+	-moz-box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #CBE6F2;
 }
 
 
@@ -160,7 +160,7 @@ div.step > div.bottom > p {
 }
 
 div.step > div.bottom > p.status {
-	background-color: #F0ED95;
+	background-color: #F0EEAF;
 	margin: 15px -15px 10px -15px;
 	padding: 7px 15px;
 	line-height: 16px;
@@ -207,7 +207,7 @@ div.step > div.bottom > p.or > sup {
 }
 
 div.step > div.bottom > p.browse {
-    background-color: #F0ED95;
+    background-color: #F0EEAF;
 	margin: 15px -15px 10px -15px;
     padding: 0px 15px;
 	line-height: 30px;

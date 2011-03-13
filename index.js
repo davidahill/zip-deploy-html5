@@ -23,10 +23,10 @@ $(function() {
 			$(this).find('div.bottom p.status').fileStatus('info');
 			
 			$(this).find('div.bottom p.status.success').hover(
-				function(){ $(this).find('img').attr('src','images/delete_16.png') },
-				function(){ $(this).find('img').attr('src','images/file_16.png') }
+				function(){ $(this).find('img').attr('src','images/delete_16.png'); },
+				function(){ $(this).find('img').attr('src','images/file_16.png'); }
 			).find('img').click( function(){
-				$(this).fileStatus('reset');
+				$(this).parent().fileStatus('reset');
 			});
 		}
 	});
@@ -37,8 +37,8 @@ $(function() {
 		});
 		
 		$(this).find('div.bottom p.status.success').hover(
-			function(){ $(this).find('img').attr('src','images/delete_16.png') },
-			function(){ $(this).find('img').attr('src','images/file_16.png') }
+			function(){ $(this).find('img').attr('src','images/delete_16.png'); },
+			function(){ $(this).find('img').attr('src','images/file_16.png'); }
 		).find('img').click( function(){
 			$(this).parent().fileStatus('reset');
 		});
