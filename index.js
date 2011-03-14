@@ -1,10 +1,22 @@
 $(function() {	
 	
-	///////////////////////////////////////////////////////
-    // Step 1 - Upload
-    
 	$('div.fileCatch, div.step.nodrop').fileDragDrop({dropEffect: false});
 	
+	$('div.step').fileDragDrop('init', {types: ['dragover']}, function(e){
+		$(this).addClass('blue');
+	});
+	
+	$('div.step').fileDragDrop('init', {types: ['dragleave']}, function(e){
+		$(this).removeClass('blue');
+	});
+	
+	///////////////////////////////////////////////////////
+    // Step 1 - Upload
+	
+	$('div.step:eq(0) input[name="overwrite"]').attr('checked','checked');
+	$('button[name="upload"]').removeAttr('disabled');
+	$('input[name="files"]').val('');
+    
 	$('div.step.drop').fileDragDrop('init', {types: ['dragover']}, function(e){
 		if($(this).data('files')){
 			e.dataTransfer.dropEffect = 'none';
@@ -47,16 +59,12 @@ $(function() {
 		});
 	});
 	
-	$('div.step').fileDragDrop('init', {types: ['dragover']}, function(e){
-		$(this).addClass('blue');
+	$('input[name="files"]').bind('change', function(){
+		var fileName = $('input[name="files"]')[0].files[0].name;
+		if(fileName.length > 0){
+			$('div.step.drop div.bottom p.browse sup').html('<img src="images/tick_16.png" />' + subName(fileName));
+		}
 	});
-	
-	$('div.step').fileDragDrop('init', {types: ['dragleave']}, function(e){
-		$(this).removeClass('blue');
-	});
-	
-	$('div.step:eq(0) input[name="overwrite"]').attr('checked','checked');
-	$('button[name="upload"]').removeAttr('disabled');
 	
 	$('button[name="upload"]').data({
     	'step': $('div.step:eq(0)'),
@@ -71,10 +79,12 @@ $(function() {
     	
 		$.ajax({
 			type: 'POST',
-			url: '/upload',
+			url: 'tasks.php?f=upload',
 			dataType: 'json',
 			data: { 
-				'overwrite': button.data('overwrite').is(':checked')
+				'overwrite': (button.data('overwrite').is(':checked') == true) ? true : undefined,
+				'file': 'tbd.zip',
+				'target': 'tbd'
 			},
 			beforeSend: function(){
 				button.data('loading').fadeIn('slow');
@@ -141,7 +151,7 @@ $(function() {
     	var button = $(this);
 		$.ajax({
 			type: 'POST',
-			url: '/purge',
+			url: 'tasks.php?f=purge',
 			dataType: 'json',
 			data: { 
 				'foo': 'bar'
@@ -173,7 +183,7 @@ $(function() {
     	var button = $(this);
 		$.ajax({
 			type: 'POST',
-			url: '/extract',
+			url: 'tasks.php?f=extract',
 			dataType: 'json',
 			data: { 
 				'foo': 'bar'
@@ -223,7 +233,7 @@ $(function() {
 				var file = $(this).parents('div.step').data('files')[0];
 				if(file){
 					$(this).removeClass('error').addClass('status success').html( function(){
-						return '<img src="images/file_16.png" />' + file.name + ' ' + '<span style="float: right;">[' + size_format(file.size) + ']</span>';
+						return '<img src="images/file_16.png" />' + subName(file.name) + ' ' + '<span style="float: right;">[' + size_format(file.size) + ']</span>';
 					});
 					//$(this).find('div.bottom button[name="upload"]').removeClass('disabled').removeAttr('disabled');
 				}
@@ -248,7 +258,7 @@ $(function() {
 	};
 	
 	function subName(name){
-		return (name.len > 21) ? name.substring(0, 12) + '...' + name.substring(name.len-9) : name;
+		return (name.length > 15) ? name.substring(0, 8) + '...' + name.substring(name.length - 7) : name;
 	}
 	
 	function roundNumber(num, dec){
