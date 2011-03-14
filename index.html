@@ -15,46 +15,53 @@
 			<div class="top">Upload<sup>1</sup></div>
 			<div class="bottom">
 				<h2>Drag &amp; Drop File <img class="loading" src="images/loading.gif" /></h2>
-				<p class="status"><img src="images/file_16.png" />Ready...</p>
+				<p class="status"><img src="images/file_16.png" />Drop file here.</p>
                 <p class="or"><sup>OR</sup></p>
                 <h2>Browse Computer</h2>
                 <p class="browse"><input type="file" name="file" /><sup><img src="images/file_16.png" />Click to browse.</sup></p>
-				<p style="text-align: right; margin-top: 15px;"><button name="upload" type="button" class="disabled" disabled>Upload</button></p>
+				<p id="upload" style="text-align: right; margin-top: 15px;">
+					<input name="overwrite" type="checkbox" checked>Overwrite?
+					<button name="upload" type="button" class="" >Upload</button>
+				</p>
 			</div>
 		</div>
+		
+		<!-- <div class="or"><sup>AND / OR</sup></div> //-->
 		
 		<div class="step nodrop">
             <div class="popup-back"></div>
             <div class="popup-list">
                 <div class="top">
-                    <img src="http://cdn1.iconfinder.com/data/icons/basicset/delete_16.png" />Cancel
+                    <img src="images/delete_16.png" />Cancel
                 </div>
                 <div class="bottom">
                     <ul>
-                        <li><img src="http://cdn1.iconfinder.com/data/icons/basicset/document_16.png" />File #1</li>
-                        <li><img src="http://cdn1.iconfinder.com/data/icons/basicset/document_16.png" />File #2</li>
-                        <li><img src="http://cdn1.iconfinder.com/data/icons/basicset/document_16.png" />File #3</li>
+                        <li><img src="images/document_16.png" />File #1</li>
+                        <li><img src="images/document_16.png" />File #2</li>
+                        <li><img src="images/document_16.png" />File #3</li>
                     </ul>
                 </div>
             </div>
 			<div class="top">Select &amp; Target<sup>2</sup></div>
 			<div class="bottom">
 				<h2>Select File</h2>
-                <p class="status" style=""><img src="http://cdn1.iconfinder.com/data/icons/basicset/document_16.png" /><button name="select" type="button" style="">Browse</button></p>
+                <p class="status" style=""><img src="images/document_16.png" /><button name="select" type="button" style="">Browse</button></p>
                 <p class="or"><sup>AND</sup></p>
                 <h2>Select Target</h2>
-				<p class="status" style=""><img src="http://cdn1.iconfinder.com/data/icons/basicset/folder_16.png" /><button name="target" type="button" style="">Browse</button></p>
+				<p class="status" style=""><img src="images/folder_16.png" /><button name="target" type="button" style="">Browse</button></p>
 			</div>
 		</div>
+		
+		<!-- <div class="or"><sup style="width: 17px; left: -15px; top: 92px;">AND</sup></div> //-->
 		
 		<div class="step nodrop">
 			<div class="top">Purge &amp; Extract<sup>3</sup></div>
 			<div class="bottom">
 				<h2>Purge <img class="loading" src="images/loading.gif" /></h2>
-                <p class="status" style=""><img src="http://cdn3.iconfinder.com/data/icons/basicset/trash_16.png" /><button name="purge" type="button" style="">Go</button></p>
+                <p class="status" style=""><img src="images/trash_16.png" /><button name="purge" type="button" style="">Go</button></p>
                 <p class="or"><sup style="left: 68px;">AND / OR</sup></p>
                 <h2>Extract <img class="loading" src="images/loading.gif" /></h2>
-                <p class="status" style=""><img src="http://cdn1.iconfinder.com/data/icons/basicset/down_16.png" /><button name="extract" type="button" style="">Go</button></p>
+                <p class="status" style=""><img src="images/down_16.png" /><button name="extract" type="button" style="">Go</button></p>
 			</div>
 		</div>
 		

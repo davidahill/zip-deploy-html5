@@ -1,5 +1,8 @@
 $(function() {	
 	
+	///////////////////////////////////////////////////////
+    // Step 1 - Upload
+    
 	$('div.fileCatch, div.step.nodrop').fileDragDrop({dropEffect: false});
 	
 	$('div.step.drop').fileDragDrop('init', {types: ['dragover']}, function(e){
@@ -20,7 +23,7 @@ $(function() {
 		if(!$(this).data('files')){
 			$(this).find('div.bottom p.status').fileStatus('reset');
 		} else {
-			$(this).find('div.bottom p.status').fileStatus('info');
+			$(this).find('div.bottom p.status').fileStatus('file');
 			
 			$(this).find('div.bottom p.status.success').hover(
 				function(){ $(this).find('img').attr('src','images/delete_16.png'); },
@@ -32,8 +35,8 @@ $(function() {
 	});
 	
 	$('div.step.drop').fileDragDrop('init', {types: ['drop']}, function(e){
-		$(this).dragDrop('handleFiles', {attach: true, evt: e}, function(e){
-			$(this).find('div.bottom p.status').fileStatus('info');
+		$(this).fileDragDrop('handleFiles', {attach: true, evt: e}, function(e){
+			$(this).find('div.bottom p.status').fileStatus('file');
 		});
 		
 		$(this).find('div.bottom p.status.success').hover(
@@ -43,39 +46,154 @@ $(function() {
 			$(this).parent().fileStatus('reset');
 		});
 	});
+	
+	$('div.step').fileDragDrop('init', {types: ['dragover']}, function(e){
+		$(this).addClass('blue');
+	});
+	
+	$('div.step').fileDragDrop('init', {types: ['dragleave']}, function(e){
+		$(this).removeClass('blue');
+	});
+	
+	$('div.step:eq(0) input[name="overwrite"]').attr('checked','checked');
+	$('button[name="upload"]').removeAttr('disabled');
+	
+	$('button[name="upload"]').data({
+    	'step': $('div.step:eq(0)'),
+    	'overwrite': $('div.step:eq(0) input[name="overwrite"]'),
+    	'loading': $('div.step:eq(0) h2:eq(0) img')
+    });
+	
+	$('button[name="upload"]').click( function(){
+    	var button = $(this);
+    	button.addClass('disabled').attr('disabled', 'disabled');
+    	$('div.step:eq(0) input[name="overwrite"]').attr('disabled', 'disabled');
+    	
+		$.ajax({
+			type: 'POST',
+			url: '/upload',
+			dataType: 'json',
+			data: { 
+				'overwrite': button.data('overwrite').is(':checked')
+			},
+			beforeSend: function(){
+				button.data('loading').fadeIn('slow');
+			},
+			success: function(json){
+				button.data('loading').fadeOut('slow');
+			},
+			error: function(error){
+				button.data('loading').fadeOut('slow');
+			}
+		});
+	});
+	
+	///////////////////////////////////////////////////////
+    // Step 2 - Select & Target
+
+    // File
+	
+	$('button[name="select"]').data({
+    	'line': $('div.step:eq(1) p.status:eq(0)'),
+    	'icon': $('div.step:eq(1) p.status:eq(0) img'),
+    	'step': $('div.step:eq(1)')
+    });
     
     $('button[name="select"]').click( function(){
-        console.log('select');
         $('div[class^="popup-back"]').fadeIn('fast', function(){
-            $(this).next('div.popup-list').fadeIn();   
+        	$(this).next('div.popup-list').fadeIn().find('div.bottom li').unbind('click').click( function(){
+            	console.log($(this));
+            	$(this).parents('div.popup-list')
+            });
         });
     });
     
-    $('button[name="purge"]').toggle( 
-        function(){
-            console.info('purge');
-            $(this).parent().prev('h2').children('img').fadeIn('slow');
-        },
-        function(){
-            $(this).parent().prev('h2').children('img').fadeOut('slow');
-        },
-        function(){
-            $(this).parent().html('<img src="http://cdn1.iconfinder.com/data/icons/basicset/tick_16.png" />Directory Purged');
-        }
-    );
+    // Target
+	
+	$('button[name="target"]').data({
+    	'line': $('div.step:eq(1) p.status:eq(1)'),
+    	'icon': $('div.step:eq(1) p.status:eq(1) img'),
+    	'step': $('div.step:eq(1)')
+    });
     
-    $('button[name="extract"]').toggle( 
-        function(){
-            console.info('extract');
-            $(this).parent().prev('h2').children('img').show();
-        },
-        function(){
-            $(this).parent().prev('h2').children('img').hide();
-        },
-        function(){
-            $(this).parent().html('<img src="http://cdn1.iconfinder.com/data/icons/basicset/tick_16.png" />504 Files Extracted');
-        }
-    );
+    $('button[name="target"]').click( function(){	
+        $('div[class^="popup-back"]').fadeIn('fast', function(){
+        	$(this).next('div.popup-list').fadeIn().find('div.bottom li').unbind('click').click( function(){
+            	console.log($(this));
+            	$(this).parents('div.popup-list')
+            });
+        });
+    });
+    
+    ///////////////////////////////////////////////////////
+    // Step 3 - Purge & Extract
+
+    // Purge
+    
+    $('button[name="purge"]').data({
+    	'line': $('div.step:eq(2) p.status:eq(0)'),
+    	'icon': $('div.step:eq(2) p.status:eq(0) img'),
+    	'loading': $('div.step:eq(2) h2:eq(0) img'),
+    	'step': $('div.step:eq(2)')
+    });
+    
+    $('button[name="purge"]').click( function(e){
+    	var button = $(this);
+		$.ajax({
+			type: 'POST',
+			url: '/purge',
+			dataType: 'json',
+			data: { 
+				'foo': 'bar'
+			},
+			beforeSend: function(){
+				button.data('loading').fadeIn('slow');
+			},
+			success: function(json){
+				button.data('loading').fadeOut('slow');
+				button.data('line').html('<img src="images/tick_16.png" />Directory Purged');
+			},
+			error: function(error){
+				button.data('loading').fadeOut('slow');
+				button.data('line').html('<img src="images/warning_16.png" />Purge Error');
+			}
+		});
+	});
+    
+    // Extract
+    
+    $('button[name="extract"]').data({
+    	'line': $('div.step:eq(2) p.status:eq(1)'),
+    	'icon': $('div.step:eq(2) p.status:eq(1) img'),
+    	'loading': $('div.step:eq(2) h2:eq(1) img'),
+    	'step': $('div.step:eq(2)')
+    });
+    
+    $('button[name="extract"]').click( function(e){
+    	var button = $(this);
+		$.ajax({
+			type: 'POST',
+			url: '/extract',
+			dataType: 'json',
+			data: { 
+				'foo': 'bar'
+			},
+			beforeSend: function(){
+				button.data('loading').fadeIn('slow');
+			},
+			success: function(json){
+				button.data('loading').fadeOut('slow');
+				button.data('line').html('<img src="images/tick_16.png" />504 Files Extracted');
+			},
+			error: function(error){
+				button.data('loading').fadeOut('slow');
+				button.data('line').html('<img src="images/warning_16.png" />Extract Error');
+			}
+		});
+	});
+    
+    ///////////////////////////////////////////////////////
+    // Common Function
     
     $('div.popup-list div.top').click( function(){
         $(this).parent().fadeOut( function(){
@@ -93,7 +211,7 @@ $(function() {
 		*/
 		
 		var methods = {
-			reset: function(){
+			ready: function(){
 				//if( options ){ $.extend( settings, options ); }
 				$(this).parents('div.step').data('files', null);
 				$(this).removeClass('error success').addClass('status').html( function(){
@@ -101,7 +219,7 @@ $(function() {
 				});
 			},
 			
-			info: function(){
+			file: function(){
 				var file = $(this).parents('div.step').data('files')[0];
 				if(file){
 					$(this).removeClass('error').addClass('status success').html( function(){
@@ -109,7 +227,15 @@ $(function() {
 					});
 					//$(this).find('div.bottom button[name="upload"]').removeClass('disabled').removeAttr('disabled');
 				}
-			}
+			},
+			
+			reset: function(){
+				//if( options ){ $.extend( settings, options ); }
+				$(this).parents('div.step').data('files', null);
+				$(this).removeClass('error success').addClass('status').html( function(){
+					return '<img src="images/file_16.png" />Drop file here.';
+				});
+			},
 		};
 		
 		if( methods[method] ){

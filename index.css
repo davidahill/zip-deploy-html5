@@ -67,7 +67,7 @@ div.fileCatch {
 
 form.container {
 	margin: 0px auto;
-	width: 882px;
+	width: 886px;
 }
 
 div.step {
@@ -106,7 +106,7 @@ div.step.red {
 	-moz-box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #F3D8D8;
 }
 
-div.step:hover {
+div.step:hover, div.step.blue {
 	box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #CBE6F2;
 	-o-box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #CBE6F2;
 	-webkit-box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #CBE6F2;
@@ -209,7 +209,7 @@ div.step > div.bottom > p.or > sup {
 div.step > div.bottom > p.browse {
     background-color: #F0EEAF;
 	margin: 15px -15px 10px -15px;
-    padding: 0px 15px;
+    padding: 0px;
 	line-height: 30px;
 	color: #333;
 	
@@ -222,7 +222,8 @@ div.step > div.bottom > p.browse {
 div.step > div.bottom > p.browse > sup {
     position: absolute;
     left: 15px;
-    z-index: 1005;
+    line-height: 30px;
+    z-index: 1010;
     cursor: pointer;
 }
 
@@ -232,16 +233,32 @@ div.step > div.bottom > p.browse > sup > img {
 }
 
 div.step > div.bottom > p.browse > input[type="file"] {
-    margin: 0px -15px 0px -15px;
+    margin: 0px;
     position: relaitve;
     opacity: 0;
-    z-index: 1010;
+    z-index: 1020;
+    height: 30px;
+    width: 250px;
 }
 
 img.loading {
     display: none;    
 }
 
+/* Step 1 -- */
+#upload {
+	font-size: 12px;	
+}
+
+#upload > input[name="overwrite"] {
+	margin-right: 5px;
+}
+
+#upload > button[name="upload"] {
+	margin-left: 10px;
+}
+
+/* Step 2 -- Popup */
 div.popup-back {
     background-color: #666;
     opacity: .8;
@@ -250,6 +267,7 @@ div.popup-back {
     width: 100%;
     height: 100%;
     z-index: 1500;
+    display: none;
 }
 
 div.popup-list {
@@ -260,7 +278,9 @@ div.popup-list {
     max-height: 276px;
     z-index: 1600;
     overflow-y: auto;
+    overflow-x: hidden;
     border: 2px solid #666;
+    display: none;
 }
 
 div.popup-list > div.top {
@@ -268,9 +288,13 @@ div.popup-list > div.top {
     line-height: 26px;
     padding: 5px;
     background-color: #F0EEAF;
-    box-shadow: 0 0px 4px #666;
     color: #333;
-    cursor: pointer;   
+    cursor: pointer;
+    
+    box-shadow: 0 0px 4px #666;
+	-o-box-shadow: 0 0px 4px #666;
+	-webkit-box-shadow: 0 0px 4px #666;
+	-moz-box-shadow: 0 0px 4px #666;
 }
 
 div.popup-list > div.top > img {
@@ -278,13 +302,15 @@ div.popup-list > div.top > img {
     vertical-align: middle;   
 }
 
-div.popup-list > div.bottom {
-    padding: 10px;   
+div.popup-list > div.bottom > ul {
+    list-style-type: none;
+    margin: 5px 0px;
 }
 
 div.popup-list > div.bottom > ul > li {
+	padding: 5px 10px;
     line-height: 16px;
-    margin-bottom: 10px;   
+    cursor: pointer;
 }
 
 div.popup-list > div.bottom > ul > li > img {
@@ -292,38 +318,30 @@ div.popup-list > div.bottom > ul > li > img {
     margin-right: 10px;
 }
 
-/*
-div.step > div.bottom > p > label {
-	display: block;
-	margin: 5px 10px 5px 0px;
-	width: 35px;
+/* Step Separator */
+
+form.container > div.or {
+	width: 1px;
+	height: 200px;
 	float: left;
-}
-
-div.step > div.bottom > p > input {
-	margin: 0px 5px;
-	vertical-align: middle;
-}
-*/
-
-/*
-div.step > div.bottom > p > input[type="file"] {
-	z-index: 2;
-	opacity: 0;
+	margin: 82px 0px;
+	z-index: 1000;
+	padding: 0px;
 	position: relative;
-	
+	border-left: 1px solid #999;
 }
 
-div.step > div.bottom > p > span.filemask {
-	display: inline;
-	position: absolute;
-	padding: 3px;
-	border: 1px solid #999;
-	background-color: #FFF;
-	width: 160px;
-	height: 16px;
-	z-index: 1;
-	cursor: pointer;
-	left: 325px;
+form.container > div.or > sup {
+	font-size: 8px;
+    font-weight: bold;
+    position: absolute;
+    background-color: #EDEDEC;
+    padding: 0px 5px;
+    color: #333;
+    z-index: 1005;
+    width: 35px;
+    left: -22px;
+    top: 98px;
+    -webkit-transform: rotate(-90deg); 
+	-moz-transform: rotate(-90deg);	
 }
-*/
