@@ -43,6 +43,45 @@ $(function() {
 			$(this).parent().fileStatus('reset');
 		});
 	});
+    
+    $('button[name="select"]').click( function(){
+        console.log('select');
+        $('div[class^="popup-back"]').fadeIn('fast', function(){
+            $(this).next('div.popup-list').fadeIn();   
+        });
+    });
+    
+    $('button[name="purge"]').toggle( 
+        function(){
+            console.info('purge');
+            $(this).parent().prev('h2').children('img').fadeIn('slow');
+        },
+        function(){
+            $(this).parent().prev('h2').children('img').fadeOut('slow');
+        },
+        function(){
+            $(this).parent().html('<img src="http://cdn1.iconfinder.com/data/icons/basicset/tick_16.png" />Directory Purged');
+        }
+    );
+    
+    $('button[name="extract"]').toggle( 
+        function(){
+            console.info('extract');
+            $(this).parent().prev('h2').children('img').show();
+        },
+        function(){
+            $(this).parent().prev('h2').children('img').hide();
+        },
+        function(){
+            $(this).parent().html('<img src="http://cdn1.iconfinder.com/data/icons/basicset/tick_16.png" />504 Files Extracted');
+        }
+    );
+    
+    $('div.popup-list div.top').click( function(){
+        $(this).parent().fadeOut( function(){
+            $(this).prev('div.popup-back').fadeOut('fast');
+        });
+    });
 	
 	$.fn.fileStatus = function(method, options){
 		/*
