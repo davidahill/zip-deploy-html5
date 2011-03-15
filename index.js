@@ -13,9 +13,14 @@ $(function() {
 	///////////////////////////////////////////////////////
     // Step 1 - Upload
 	
-	$('div.step:eq(0) input[name="overwrite"]').attr('checked','checked');
+	$('div.step:eq(0) input[name="overwrite"]').removeAttr('disabled').attr('checked','checked');
 	$('button[name="upload"]').removeAttr('disabled');
 	$('input[name="files"]').val('');
+	
+	$('p.browse').hover(
+		function(){ $(this).find('sup span').hide(); },
+		function(){ $(this).find('sup span').show(); }
+	);
     
 	$('div.step.drop').fileDragDrop('init', {types: ['dragover']}, function(e){
 		if($(this).data('files')){
@@ -62,7 +67,7 @@ $(function() {
 	$('input[name="files"]').bind('change', function(){
 		var fileName = $('input[name="files"]')[0].files[0].name;
 		if(fileName.length > 0){
-			$('div.step.drop div.bottom p.browse sup').html('<img src="images/tick_16.png" />' + subName(fileName));
+			$('div.step.drop div.bottom p.browse sup span').html(subName(fileName));
 		}
 	});
 	
@@ -77,13 +82,73 @@ $(function() {
     	button.addClass('disabled').attr('disabled', 'disabled');
     	$('div.step:eq(0) input[name="overwrite"]').attr('disabled', 'disabled');
     	
+    	/*
+    	var fileInput = $('input[name="files"]')[0];
+		var file = fileInput.files[0];
+		
+		//$('input[name="files"]').attr('disabled', 'disabled');
+		
+		//if($('input[name="files"]').val().length > 0){
+		//	fileName = $('input[name="files"]').val();
+		//}
+		*/
+		
+		//console.log(file.type); // image/jpeg
+
+		var xhr = new XMLHttpRequest();
+		xhr.open('POST', 'tasks.php', true);
+		
+		xhr.upload.addEventListener('progress', function(e){
+			if(e.lengthComputable){
+				var percentage = Math.round((e.loaded * 100) / e.total);
+				console.log('Upload progress: ' + percentage + '%');
+			}
+		}, false);
+	
+		//xhr.upload.addEventListener('load', function(){
+		//	step.find('h2 img').remove();
+		//	step.addClass('success');
+		//}, false);
+		
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState == 1){
+				//step.find('h2').append('<img src="loading.gif" />');
+			}
+			if(xhr.readyState == 4){
+				//step.find('h2 img').remove();
+				
+				if(xhr.status == 200 || xhr.status == 304){
+					//tep.addClass('success');
+					//step.find('p.result').text(xhr.responseText).slideDown();
+					//$('span.selectedFile').text(fileName);
+					$('div.step:eq(0) input[name="overwrite"]').removeAttr('disabled').attr('checked','checked');
+					$('button[name="upload"]').removeClass('disabled').removeAttr('disabled');
+					$('input[name="files"]').val('');
+				} else {
+					//step.addClass('error');
+					//step.find('p.result').text(xhr.responseText).slideDown();
+				}
+			}
+		}
+		
+		var file = $('div.step:eq(0)').data('files')[0];
+		
+		xhr.setRequestHeader('Content-Type', 'application/octet-stream');
+		xhr.setRequestHeader('X-File-Name', file.name);
+		xhr.setRequestHeader('X-Content-Length', file.size);
+		xhr.setRequestHeader('X-Task', 'upload');
+		
+		xhr.sendAsBinary(file.getAsBinary());
+    	
+		/*
 		$.ajax({
 			type: 'POST',
-			url: 'tasks.php?f=upload',
+			url: 'tasks.php',
 			dataType: 'json',
-			data: { 
+			data: {
+				'f': 'upload',
 				'overwrite': (button.data('overwrite').is(':checked') == true) ? true : undefined,
-				'file': 'tbd.zip',
+				'file': 'foo.zip',
 				'target': 'tbd'
 			},
 			beforeSend: function(){
@@ -96,6 +161,7 @@ $(function() {
 				button.data('loading').fadeOut('slow');
 			}
 		});
+		*/
 	});
 	
 	///////////////////////////////////////////////////////
@@ -151,10 +217,11 @@ $(function() {
     	var button = $(this);
 		$.ajax({
 			type: 'POST',
-			url: 'tasks.php?f=purge',
+			url: 'tasks.php',
 			dataType: 'json',
-			data: { 
-				'foo': 'bar'
+			data: {
+				'f': 'purge',
+				'target': 'akef'
 			},
 			beforeSend: function(){
 				button.data('loading').fadeIn('slow');
@@ -165,7 +232,7 @@ $(function() {
 			},
 			error: function(error){
 				button.data('loading').fadeOut('slow');
-				button.data('line').html('<img src="images/warning_16.png" />Purge Error');
+				button.data('line').html('<img src="images/warning_16.png" />' + error.responseText);
 			}
 		});
 	});
@@ -183,21 +250,23 @@ $(function() {
     	var button = $(this);
 		$.ajax({
 			type: 'POST',
-			url: 'tasks.php?f=extract',
+			url: 'tasks.php',
 			dataType: 'json',
-			data: { 
-				'foo': 'bar'
+			data: {
+				'f': 'extract',
+				'target': 'akef',
+				'file': 'deploy.zip'
 			},
 			beforeSend: function(){
 				button.data('loading').fadeIn('slow');
 			},
 			success: function(json){
 				button.data('loading').fadeOut('slow');
-				button.data('line').html('<img src="images/tick_16.png" />504 Files Extracted');
+				button.data('line').html('<img src="images/tick_16.png" />' + json.result);
 			},
 			error: function(error){
 				button.data('loading').fadeOut('slow');
-				button.data('line').html('<img src="images/warning_16.png" />Extract Error');
+				button.data('line').html('<img src="images/warning_16.png" />' + error.responseText);
 			}
 		});
 	});

@@ -222,7 +222,7 @@ div.step > div.bottom > p.browse {
 div.step > div.bottom > p.browse > sup {
     position: absolute;
     left: 15px;
-    top: 202px;
+    top: 200px;
     line-height: 30px;
     z-index: 1010;
     cursor: pointer;
@@ -254,7 +254,7 @@ img.loading {
 }
 
 #upload > input[name="overwrite"] {
-	margin: 0px 5px 4px 0px;
+	margin: 0px 5px 3px 0px;
     vertical-align: middle;
 }
 
