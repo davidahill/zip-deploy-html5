@@ -96,6 +96,38 @@ if($_SERVER['HTTP_X_TASK'] == 'upload'){
 		echo $results['result'];
 	}
 	
+} else if($_POST['f'] == 'select'){
+	$results['success'] = true;
+		
+	$results['selects'] = array(
+		'file1.zip' => 'file1.zip',
+		'file2.zip' => 'file2.zip'
+	);
+	
+	if($results['success'] == true){
+		echo header('HTTP/1.0 200 Ok');
+		echo json_encode( $results );
+	} else {
+		echo header('HTTP/1.0 400 Bad Request');
+		echo $results['result'];
+	}
+	
+} else if($_POST['f'] == 'target'){
+	$results['success'] = true;
+		
+	$results['targets'] = array(
+		'folder1' => 'Folder 1',
+		'folder2' => 'Folder 2'
+	);
+	
+	if($results['success'] == true){
+		echo header('HTTP/1.0 200 Ok');
+		echo json_encode( $results );
+	} else {
+		echo header('HTTP/1.0 400 Bad Request');
+		echo $results['result'];
+	}
+	
 } else {
 	$results['success'] = false;
 	$results['result'] = 'Invalid task.';

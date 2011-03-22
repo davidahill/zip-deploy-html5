@@ -25,24 +25,20 @@ $(function() {
 	$('div.step.drop').fileDragDrop('init', {types: ['dragover']}, function(e){
 		if($(this).data('files')){
 			e.dataTransfer.dropEffect = 'none';
-			$(this).find('div.bottom p.status').addClass('error').html( function(){
-				return '<img src="images/warning_16.png" />File already dropped.';
-			});
+			$(this).find('div.bottom div.ribbon').fileStatus('filled');
 		} else if(e.dataTransfer.mozItemCount > 1){
 			e.dataTransfer.dropEffect = 'none';
-			$(this).find('div.bottom p.status').addClass('error').html( function(){
-				return '<img src="images/warning_16.png" />Only 1 file allowed.';
-			});
+			$(this).find('div.bottom div.ribbon').fileStatus('nomore');
 		}
 	});
 	
 	$('div.step.drop').fileDragDrop('init', {types: ['dragleave']}, function(e){
 		if(!$(this).data('files')){
-			$(this).find('div.bottom p.status').fileStatus('reset');
+			$(this).find('div.bottom div.ribbon').fileStatus('reset');
 		} else {
-			$(this).find('div.bottom p.status').fileStatus('file');
+			$(this).find('div.bottom div.ribbon').fileStatus('file');
 			
-			$(this).find('div.bottom p.status.success').hover(
+			$(this).find('div.bottom div.ribbon.success').hover(
 				function(){ $(this).find('img').attr('src','images/delete_16.png'); },
 				function(){ $(this).find('img').attr('src','images/file_16.png'); }
 			).find('img').click( function(){
@@ -53,10 +49,10 @@ $(function() {
 	
 	$('div.step.drop').fileDragDrop('init', {types: ['drop']}, function(e){
 		$(this).fileDragDrop('handleFiles', {attach: true, evt: e}, function(e){
-			$(this).find('div.bottom p.status').fileStatus('file');
+			$(this).find('div.bottom div.ribbon').fileStatus('file');
 		});
 		
-		$(this).find('div.bottom p.status.success').hover(
+		$(this).find('div.bottom div.ribbon.success').hover(
 			function(){ $(this).find('img').attr('src','images/delete_16.png'); },
 			function(){ $(this).find('img').attr('src','images/file_16.png'); }
 		).find('img').click( function(){
@@ -166,39 +162,85 @@ $(function() {
 	
 	///////////////////////////////////////////////////////
     // Step 2 - Select & Target
-
-    // File
-	
-	$('button[name="select"]').data({
-    	'line': $('div.step:eq(1) p.status:eq(0)'),
-    	'icon': $('div.step:eq(1) p.status:eq(0) img'),
-    	'step': $('div.step:eq(1)')
-    });
-    
-    $('button[name="select"]').click( function(){
-        $('div[class^="popup-back"]').fadeIn('fast', function(){
-        	$(this).next('div.popup-list').fadeIn().find('div.bottom li').unbind('click').click( function(){
-            	console.log($(this));
-            	$(this).parents('div.popup-list')
-            });
-        });
-    });
     
     // Target
 	
 	$('button[name="target"]').data({
-    	'line': $('div.step:eq(1) p.status:eq(1)'),
-    	'icon': $('div.step:eq(1) p.status:eq(1) img'),
+    	'line': $('div.step:eq(1) div.ribbon:eq(0)'),
+    	'text': $('div.step:eq(1) div.ribbon:eq(0) span.text'),
+    	'icon': $('div.step:eq(1) div.ribbon:eq(0) img'),
     	'step': $('div.step:eq(1)')
     });
     
-    $('button[name="target"]').click( function(){	
-        $('div[class^="popup-back"]').fadeIn('fast', function(){
-        	$(this).next('div.popup-list').fadeIn().find('div.bottom li').unbind('click').click( function(){
-            	console.log($(this));
-            	$(this).parents('div.popup-list')
-            });
-        });
+    $('button[name="target"]').click( function(){
+    	var button = $(this);
+    	$.ajax({
+			type: 'POST',
+			url: 'tasks.php',
+			dataType: 'json',
+			data: {
+				'f': 'target'
+			},
+			success: function(json){
+				var ul = $('div[class="popup-list"] div.bottom ul').empty();
+				$.each(json.targets, function(key, target){
+					$('<li>').text(target).click( function(){
+						$('form').data('target', key);
+						button.data('text').text(target);
+						$(this).parents('div.popup-list').fadeOut( function(){
+		                    $(this).prev('div.popup-back').fadeOut('fast');
+		                });
+					}).appendTo(ul);
+				});
+				$('div[class^="popup-back"]').fadeIn('fast', function(){
+		        	$(this).next('div.popup-list').fadeIn();
+		        });				
+			},
+			error: function(error){
+				button.data('icon').attr('src', 'images/warning_16.png');
+				button.data('text').text(error.responseText);
+			}
+		});
+    });
+    
+    // Select File
+	
+	$('button[name="select"]').data({
+    	'line': $('div.step:eq(1) div.ribbon:eq(1)'),
+    	'text': $('div.step:eq(1) div.ribbon:eq(1) span.text'),
+    	'icon': $('div.step:eq(1) div.ribbon:eq(1) img'),
+    	'step': $('div.step:eq(1)')
+    });
+    
+    $('button[name="select"]').click( function(){
+    	var button = $(this);
+    	$.ajax({
+			type: 'POST',
+			url: 'tasks.php',
+			dataType: 'json',
+			data: {
+				'f': 'select'
+			},
+			success: function(json){
+				var ul = $('div[class="popup-list"] div.bottom ul').empty();
+				$.each(json.selects, function(key, select){
+					$('<li>').text(select).click( function(){
+						$('form').data('select', key);
+						button.data('text').text(select);
+						$(this).parents('div.popup-list').fadeOut( function(){
+		                    $(this).prev('div.popup-back').fadeOut('fast');
+		                });
+					}).appendTo(ul);
+				});
+				$('div[class^="popup-back"]').fadeIn('fast', function(){
+		        	$(this).next('div.popup-list').fadeIn();
+		        });				
+			},
+			error: function(error){
+				button.data('icon').attr('src', 'images/warning_16.png');
+				button.data('text').text(error.responseText);
+			}
+		});
     });
     
     ///////////////////////////////////////////////////////
@@ -207,8 +249,9 @@ $(function() {
     // Purge
     
     $('button[name="purge"]').data({
-    	'line': $('div.step:eq(2) p.status:eq(0)'),
-    	'icon': $('div.step:eq(2) p.status:eq(0) img'),
+    	'line': $('div.step:eq(2) div.ribbon:eq(0)'),
+    	'text': $('div.step:eq(2) div.ribbon:eq(0) span.text'),
+    	'icon': $('div.step:eq(2) div.ribbon:eq(0) img'),
     	'loading': $('div.step:eq(2) h2:eq(0) img'),
     	'step': $('div.step:eq(2)')
     });
@@ -221,18 +264,20 @@ $(function() {
 			dataType: 'json',
 			data: {
 				'f': 'purge',
-				'target': 'akef'
+				'target': 'folder1'
 			},
 			beforeSend: function(){
 				button.data('loading').fadeIn('slow');
 			},
 			success: function(json){
 				button.data('loading').fadeOut('slow');
-				button.data('line').html('<img src="images/tick_16.png" />Directory Purged');
+				button.data('icon').attr('src', 'images/tick_16.png');
+				button.data('text').text('Directory Purged');
 			},
 			error: function(error){
 				button.data('loading').fadeOut('slow');
-				button.data('line').html('<img src="images/warning_16.png" />' + error.responseText);
+				button.data('icon').attr('src', 'images/warning_16.png');
+				button.data('text').text(error.responseText);
 			}
 		});
 	});
@@ -240,8 +285,9 @@ $(function() {
     // Extract
     
     $('button[name="extract"]').data({
-    	'line': $('div.step:eq(2) p.status:eq(1)'),
-    	'icon': $('div.step:eq(2) p.status:eq(1) img'),
+    	'line': $('div.step:eq(2) div.ribbon:eq(1)'),
+    	'text': $('div.step:eq(2) div.ribbon:eq(1) span.text'),
+    	'icon': $('div.step:eq(2) div.ribbon:eq(1) img'),
     	'loading': $('div.step:eq(2) h2:eq(1) img'),
     	'step': $('div.step:eq(2)')
     });
@@ -254,19 +300,21 @@ $(function() {
 			dataType: 'json',
 			data: {
 				'f': 'extract',
-				'target': 'akef',
-				'file': 'deploy.zip'
+				'target': 'folder1',
+				'file': 'file1.zip'
 			},
 			beforeSend: function(){
 				button.data('loading').fadeIn('slow');
 			},
 			success: function(json){
 				button.data('loading').fadeOut('slow');
-				button.data('line').html('<img src="images/tick_16.png" />' + json.result);
+				button.data('icon').attr('src', 'images/tick_16.png');
+				button.data('text').text(json.result);
 			},
 			error: function(error){
 				button.data('loading').fadeOut('slow');
-				button.data('line').html('<img src="images/warning_16.png" />' + error.responseText);
+				button.data('icon').attr('src', 'images/warning_16.png');
+				button.data('text').text(error.responseText);
 			}
 		});
 	});
@@ -293,16 +341,14 @@ $(function() {
 			ready: function(){
 				//if( options ){ $.extend( settings, options ); }
 				$(this).parents('div.step').data('files', null);
-				$(this).removeClass('error success').addClass('status').html( function(){
-					return '<img src="images/file_16.png" />Ready...';
-				});
+				$(this).removeClass('error success').addClass('status').find('img').attr('src', 'images/file_16.png').next('span.text').text('Ready...');
 			},
 			
 			file: function(){
 				var file = $(this).parents('div.step').data('files')[0];
 				if(file){
-					$(this).removeClass('error').addClass('status success').html( function(){
-						return '<img src="images/file_16.png" />' + subName(file.name) + ' ' + '<span style="float: right;">[' + size_format(file.size) + ']</span>';
+					$(this).removeClass('error').addClass('status success').find('img').attr('src', 'images/file_16.png').next('span.text').html( function(){
+						return subName(file.name) + ' ' + '<span style="float: right;">[' + size_format(file.size) + ']</span>';
 					});
 					//$(this).find('div.bottom button[name="upload"]').removeClass('disabled').removeAttr('disabled');
 				}
@@ -311,10 +357,20 @@ $(function() {
 			reset: function(){
 				//if( options ){ $.extend( settings, options ); }
 				$(this).parents('div.step').data('files', null);
-				$(this).removeClass('error success').addClass('status').html( function(){
-					return '<img src="images/file_16.png" />Drop file here.';
-				});
+				$(this).removeClass('error success').addClass('status').find('img').attr('src', 'images/file_16.png').next('span.text').text('Drop file here.');
 			},
+			
+			nomore: function(){
+				//if( options ){ $.extend( settings, options ); }
+				$(this).parents('div.step').data('files', null);
+				$(this).removeClass('success').addClass('error').find('img').attr('src', 'images/warning_16.png').next('span.text').text('Only 1 file allowed.');
+			},
+			
+			filled: function(){
+				//if( options ){ $.extend( settings, options ); }
+				$(this).parents('div.step').data('files', null);
+				$(this).removeClass('success').addClass('error').find('img').attr('src', 'images/warning_16.png').next('span.text').text('File already dropped.');
+			}
 		};
 		
 		if( methods[method] ){

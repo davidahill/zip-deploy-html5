@@ -20,7 +20,7 @@ input {
 button {
 	background-color: #FFF;
 	color: #5C5C5C;
-	padding: 5px 15px;
+	padding: 5px 5px;
 	cursor: pointer;
 	font-weight: bold;
 
@@ -155,16 +155,14 @@ div.step > div.bottom > h2 > img.loading {
 	float: right;
 }
 
-div.step > div.bottom > p {
+div.step > div.bottom > div {
     clear: both;   
 }
 
-div.step > div.bottom > p.status {
+div.step > div.bottom > div.ribbon {
 	background-color: #F0EEAF;
 	margin: 15px -15px 10px -15px;
 	padding: 7px 15px;
-	line-height: 16px;
-	color: #333;
 	
 	box-shadow: 0 0px 4px #666;
 	-o-box-shadow: 0 0px 4px #666;
@@ -172,20 +170,33 @@ div.step > div.bottom > p.status {
 	-moz-box-shadow: 0 0px 4px #666;
 }
 
-div.step > div.bottom > p.status > img {
-	margin-right: 10px;
+div.step > div.bottom > div.ribbon > img {
+	margin-right: 7px;
 	vertical-align: middle;
+	
 }
 
-div.step > div.bottom > p.status.error {
+div.step > div.bottom > div.ribbon > span.text {
+	margin-right: 10px;
+	line-height: 30px;
+	height: 30px;
+	display: inline-block;
+	color: #333;
+}
+
+div.step > div.bottom > div.ribbon > button {
+	float: right;
+}
+
+div.step > div.bottom > div.ribbon.error {
 	background-color: #F3D8D8;
 }
 
-div.step > div.bottom > p.status.success {
+div.step > div.bottom > div.ribbon.success {
 	background-color: #BEE6C0;
 }
 
-div.step > div.bottom > p.status.success > img {
+div.step > div.bottom > div.ribbon.success > img {
 	cursor: pointer;
 }
 
@@ -222,7 +233,6 @@ div.step > div.bottom > p.browse {
 div.step > div.bottom > p.browse > sup {
     position: absolute;
     left: 15px;
-    top: 200px;
     line-height: 30px;
     z-index: 1010;
     cursor: pointer;

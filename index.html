@@ -14,20 +14,19 @@
 		<div class="step drop">
 			<div class="top">Upload<sup>1</sup></div>
 			<div class="bottom">
-				<h2>Drag &amp; Drop File <img class="loading" src="images/loading.gif" /></h2>
-				<p class="status">
-					<img src="images/file_16.png" /><span>Drop file here.</span>
-				</p>
-                <p class="or"><sup>OR</sup></p>
-                <h2>Browse Computer</h2>
+				<h2>Browse or Drop File <img class="loading" src="images/loading.gif" /></h2>
+				<div class="ribbon">
+					<img src="images/file_16.png" />
+					<span class="text">Drop file here.</span>
+				</div>
                 <p class="browse">
                 	<input type="file" name="files" />
                 	<sup><img src="images/file_16.png" /><span>Click to browse.</span></sup>
                 </p>
-				<p id="upload" style="text-align: right; margin-top: 15px;">
+				<div id="upload" style="text-align: right; margin-top: 15px;">
 					<input name="overwrite" type="checkbox" checked>Overwrite?
 					<button name="upload" type="button" class="" >Upload</button>
-				</p>
+				</div>
 			</div>
 		</div>
 		
@@ -40,20 +39,26 @@
                     <img src="images/delete_16.png" />Cancel
                 </div>
                 <div class="bottom">
-                    <ul>
-                        <li><img src="images/document_16.png" />File #1</li>
-                        <li><img src="images/document_16.png" />File #2</li>
-                        <li><img src="images/document_16.png" />File #3</li>
-                    </ul>
+                    <ul></ul>
                 </div>
             </div>
 			<div class="top">Select &amp; Target<sup>2</sup></div>
 			<div class="bottom">
-				<h2>Select File</h2>
-                <p class="status" style=""><img src="images/document_16.png" /><button name="select" type="button" style="">Browse</button></p>
+				<h2>Select Target</h2>
+				<div class="ribbon" style="">
+					<img src="images/folder_16.png" />
+					<span class="text">&nbsp;</span>
+					<button name="target" type="button">Browse</button>
+					<div style="clear: both;"></div>
+				</div>
                 <p class="or"><sup>AND</sup></p>
-                <h2>Select Target</h2>
-				<p class="status" style=""><img src="images/folder_16.png" /><button name="target" type="button" style="">Browse</button></p>
+                <h2>Select File</h2>
+                <div class="ribbon" style="">
+                	<img src="images/document_16.png" />
+                	<span class="text">&nbsp;</span>
+                	<button name="select" type="button" style="">Browse</button>
+                	<div style="clear: both;"></div>
+                </div>
 			</div>
 		</div>
 		
@@ -63,10 +68,20 @@
 			<div class="top">Purge &amp; Extract<sup>3</sup></div>
 			<div class="bottom">
 				<h2>Purge <img class="loading" src="images/loading.gif" /></h2>
-                <p class="status" style=""><img src="images/trash_16.png" /><button name="purge" type="button" style="">Go</button></p>
+                <div class="ribbon">
+                	<img src="images/trash_16.png" />
+                	<span class="text">&nbsp;</span>
+                	<button name="purge" type="button" style="">Go</button>
+                	<div style="clear: both;"></div>
+                </div>
                 <p class="or"><sup style="left: 68px;">AND / OR</sup></p>
                 <h2>Extract <img class="loading" src="images/loading.gif" /></h2>
-                <p class="status" style=""><img src="images/down_16.png" /><button name="extract" type="button" style="">Go</button></p>
+                <div class="ribbon">
+               		<img src="images/down_16.png" />
+               		<span class="text">&nbsp;</span>
+               		<button name="extract" type="button" style="">Go</button>
+               		<div style="clear: both;"></div>
+               	</div>
 			</div>
 		</div>
 		
