@@ -98,11 +98,20 @@ if($_SERVER['HTTP_X_TASK'] == 'upload'){
 	
 } else if($_POST['f'] == 'select'){
 	$results['success'] = true;
+	
+	$path = 'uploads';
+	$handle = opendir($dir);
+	
+	if ($handle = opendir($path)) {
+	    while( false !== ($file = readdir($handle)) ){
+	        if(is_file($path."/".$file)){
+	        	$files[] = $file;
+	        }
+	    }
+	    closedir($handle);
+	}
 		
-	$results['selects'] = array(
-		'file1.zip' => 'file1.zip',
-		'file2.zip' => 'file2.zip'
-	);
+	$results['selects'] = $files;
 	
 	if($results['success'] == true){
 		echo header('HTTP/1.0 200 Ok');

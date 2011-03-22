@@ -79,7 +79,7 @@ div.step {
 	
 	padding: 0px;
 	overflow: hidden;
-	background: #FFF;
+	background-color: #FFF;
 	position: relative;
 	
 	border: 2px solid #666;
@@ -117,10 +117,12 @@ div.step:hover, div.step.blue {
 div.step > div.top {
 	height: 50px;
 	overflow: hidden;
-	box-shadow: 0 0px 4px #666;
-	-o-box-shadow: 0 0px 4px #666;
-	-webkit-box-shadow: 0 0px 4px #666;
-	-moz-box-shadow: 0 0px 4px #666;
+	background-color: #FFF;
+	
+	box-shadow: 0px 0px 4px #666;
+	-o-box-shadow: 0px 0px 4px #666;
+	-webkit-box-shadow: 0px 0px 4px #666;
+	-moz-box-shadow: 0px 0px 4px #666;
 	
 	line-height: 50px;
 	font-size: 20px;

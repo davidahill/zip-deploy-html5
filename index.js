@@ -166,10 +166,8 @@ $(function() {
     // Target
 	
 	$('button[name="target"]').data({
-    	'line': $('div.step:eq(1) div.ribbon:eq(0)'),
     	'text': $('div.step:eq(1) div.ribbon:eq(0) span.text'),
-    	'icon': $('div.step:eq(1) div.ribbon:eq(0) img'),
-    	'step': $('div.step:eq(1)')
+    	'icon': $('div.step:eq(1) div.ribbon:eq(0) img')
     });
     
     $('button[name="target"]').click( function(){
@@ -206,10 +204,8 @@ $(function() {
     // Select File
 	
 	$('button[name="select"]').data({
-    	'line': $('div.step:eq(1) div.ribbon:eq(1)'),
     	'text': $('div.step:eq(1) div.ribbon:eq(1) span.text'),
-    	'icon': $('div.step:eq(1) div.ribbon:eq(1) img'),
-    	'step': $('div.step:eq(1)')
+    	'icon': $('div.step:eq(1) div.ribbon:eq(1) img')
     });
     
     $('button[name="select"]').click( function(){
@@ -225,7 +221,7 @@ $(function() {
 				var ul = $('div[class="popup-list"] div.bottom ul').empty();
 				$.each(json.selects, function(key, select){
 					$('<li>').text(select).click( function(){
-						$('form').data('select', key);
+						$('form').data('select', select);
 						button.data('text').text(select);
 						$(this).parents('div.popup-list').fadeOut( function(){
 		                    $(this).prev('div.popup-back').fadeOut('fast');
@@ -249,11 +245,9 @@ $(function() {
     // Purge
     
     $('button[name="purge"]').data({
-    	'line': $('div.step:eq(2) div.ribbon:eq(0)'),
     	'text': $('div.step:eq(2) div.ribbon:eq(0) span.text'),
     	'icon': $('div.step:eq(2) div.ribbon:eq(0) img'),
-    	'loading': $('div.step:eq(2) h2:eq(0) img'),
-    	'step': $('div.step:eq(2)')
+    	'loading': $('div.step:eq(2) h2:eq(0) img')
     });
     
     $('button[name="purge"]').click( function(e){
@@ -264,7 +258,7 @@ $(function() {
 			dataType: 'json',
 			data: {
 				'f': 'purge',
-				'target': 'folder1'
+				'target': $('form').data('target')
 			},
 			beforeSend: function(){
 				button.data('loading').fadeIn('slow');
@@ -285,11 +279,9 @@ $(function() {
     // Extract
     
     $('button[name="extract"]').data({
-    	'line': $('div.step:eq(2) div.ribbon:eq(1)'),
     	'text': $('div.step:eq(2) div.ribbon:eq(1) span.text'),
     	'icon': $('div.step:eq(2) div.ribbon:eq(1) img'),
-    	'loading': $('div.step:eq(2) h2:eq(1) img'),
-    	'step': $('div.step:eq(2)')
+    	'loading': $('div.step:eq(2) h2:eq(1) img')
     });
     
     $('button[name="extract"]').click( function(e){
@@ -300,8 +292,8 @@ $(function() {
 			dataType: 'json',
 			data: {
 				'f': 'extract',
-				'target': 'folder1',
-				'file': 'file1.zip'
+				'target': $('form').data('target'),
+				'file': $('form').data('select')
 			},
 			beforeSend: function(){
 				button.data('loading').fadeIn('slow');
