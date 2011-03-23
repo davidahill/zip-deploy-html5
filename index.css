@@ -118,6 +118,9 @@ div.step > div.top {
 	height: 50px;
 	overflow: hidden;
 	background-color: #FFF;
+    
+    border-radius: 5px 5px 0px 0px;
+    -moz-border-radius: 5px 5px 0px 0px;
 	
 	box-shadow: 0px 0px 4px #666;
 	-o-box-shadow: 0px 0px 4px #666;
