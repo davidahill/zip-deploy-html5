@@ -182,7 +182,7 @@ $(function() {
 			success: function(json){
 				var ul = $('div[class="popup-list"] div.bottom ul').empty();
 				$.each(json.targets, function(key, target){
-					$('<li>').text(target).click( function(){
+					$('<li>').text(target).prepend('<img src="images/folder_16.png" />').click( function(){
 						$('form').data('target', key);
 						button.data('text').text(target);
 						$(this).parents('div.popup-list').fadeOut( function(){
@@ -220,7 +220,7 @@ $(function() {
 			success: function(json){
 				var ul = $('div[class="popup-list"] div.bottom ul').empty();
 				$.each(json.selects, function(key, select){
-					$('<li>').text(select).click( function(){
+					$('<li>').text(select).prepend('<img src="images/document_16.png" />').click( function(){
 						$('form').data('select', select);
 						button.data('text').text(select);
 						$(this).parents('div.popup-list').fadeOut( function(){
