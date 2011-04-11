@@ -77,6 +77,7 @@ $(function() {
     	var button = $(this);
     	button.addClass('disabled').attr('disabled', 'disabled');
     	$('div.step:eq(0) input[name="overwrite"]').attr('disabled', 'disabled');
+    	button.data('loading').fadeIn('slow');
     	
     	/*
     	var fileInput = $('input[name="files"]')[0];
@@ -97,7 +98,7 @@ $(function() {
 		xhr.upload.addEventListener('progress', function(e){
 			if(e.lengthComputable){
 				var percentage = Math.round((e.loaded * 100) / e.total);
-				console.log('Upload progress: ' + percentage + '%');
+				console.log(percentage + '%');
 			}
 		}, false);
 	
@@ -120,6 +121,7 @@ $(function() {
 					$('div.step:eq(0) input[name="overwrite"]').removeAttr('disabled').attr('checked','checked');
 					$('button[name="upload"]').removeClass('disabled').removeAttr('disabled');
 					$('input[name="files"]').val('');
+					button.data('loading').fadeOut('slow');					
 				} else {
 					//step.addClass('error');
 					//step.find('p.result').text(xhr.responseText).slideDown();
@@ -127,14 +129,21 @@ $(function() {
 			}
 		}
 		
-		var file = $('div.step:eq(0)').data('files')[0];
+		if($('div.step:eq(0)').data('files') != undefined){
+			var file = $('div.step:eq(0)').data('files')[0];
+			
+			xhr.setRequestHeader('Content-Type', 'application/octet-stream');
+			xhr.setRequestHeader('X-File-Name', file.name);
+			xhr.setRequestHeader('X-Content-Length', file.size);
+			xhr.setRequestHeader('X-Task', 'upload');
+			
+			xhr.sendAsBinary(file.getAsBinary());
+		} else {
+			$('div.step:eq(0) input[name="overwrite"]').removeAttr('disabled').attr('checked','checked');
+			$('button[name="upload"]').removeClass('disabled').removeAttr('disabled');
+			button.data('loading').fadeOut('slow');
+		}
 		
-		xhr.setRequestHeader('Content-Type', 'application/octet-stream');
-		xhr.setRequestHeader('X-File-Name', file.name);
-		xhr.setRequestHeader('X-Content-Length', file.size);
-		xhr.setRequestHeader('X-Task', 'upload');
-		
-		xhr.sendAsBinary(file.getAsBinary());
     	
 		/*
 		$.ajax({

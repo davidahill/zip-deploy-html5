@@ -1,5 +1,7 @@
 <?php
 
+require('config.php');
+
 if($_SERVER['HTTP_X_TASK'] == 'upload'){
 	$results['success'] = false;
 	
@@ -124,10 +126,7 @@ if($_SERVER['HTTP_X_TASK'] == 'upload'){
 } else if($_POST['f'] == 'target'){
 	$results['success'] = true;
 		
-	$results['targets'] = array(
-		'folder1' => 'Folder 1',
-		'folder2' => 'Folder 2'
-	);
+	$results['targets'] = $targets;
 	
 	if($results['success'] == true){
 		echo header('HTTP/1.0 200 Ok');

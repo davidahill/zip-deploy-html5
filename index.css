@@ -364,3 +364,11 @@ form.container > div.or > sup {
     -webkit-transform: rotate(-90deg); 
 	-moz-transform: rotate(-90deg);	
 }
+
+.clearfix:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
