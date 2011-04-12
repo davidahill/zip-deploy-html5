@@ -70,14 +70,14 @@ $(function() {
 	$('button[name="upload"]').data({
     	'step': $('div.step:eq(0)'),
     	'overwrite': $('div.step:eq(0) input[name="overwrite"]'),
-    	'loading': $('div.step:eq(0) h2:eq(0) img')
+    	'loading': $('div.step:eq(0) h2:eq(0) img'),
+    	'percent': $('div.step:eq(0) button[name="upload"]')
     });
 	
 	$('button[name="upload"]').click( function(){
-    	var button = $(this);
-    	button.addClass('disabled').attr('disabled', 'disabled');
+    	var _self = $(this);
+    	_self.addClass('disabled').attr('disabled', 'disabled');
     	$('div.step:eq(0) input[name="overwrite"]').attr('disabled', 'disabled');
-    	button.data('loading').fadeIn('slow');
     	
     	/*
     	var fileInput = $('input[name="files"]')[0];
@@ -98,7 +98,7 @@ $(function() {
 		xhr.upload.addEventListener('progress', function(e){
 			if(e.lengthComputable){
 				var percentage = Math.round((e.loaded * 100) / e.total);
-				console.log(percentage + '%');
+				_self.data('percent').text(percentage + '%');
 			}
 		}, false);
 	
@@ -109,22 +109,19 @@ $(function() {
 		
 		xhr.onreadystatechange = function(){
 			if(xhr.readyState == 1){
-				//step.find('h2').append('<img src="loading.gif" />');
+				_self.data('loading').fadeIn('slow');
 			}
-			if(xhr.readyState == 4){
-				//step.find('h2 img').remove();
+			if(xhr.readyState == 4){				
+				$('div.step:eq(0) input[name="overwrite"]').removeAttr('disabled').attr('checked','checked');
+				$('button[name="upload"]').removeClass('disabled').removeAttr('disabled');
+				$('input[name="files"]').val('');
+				_self.data('percent').text('Upload');
+				_self.data('loading').fadeOut('slow');	
 				
 				if(xhr.status == 200 || xhr.status == 304){
-					//tep.addClass('success');
-					//step.find('p.result').text(xhr.responseText).slideDown();
-					//$('span.selectedFile').text(fileName);
-					$('div.step:eq(0) input[name="overwrite"]').removeAttr('disabled').attr('checked','checked');
-					$('button[name="upload"]').removeClass('disabled').removeAttr('disabled');
-					$('input[name="files"]').val('');
-					button.data('loading').fadeOut('slow');					
+					_self.data('step').find('div.ribbon').fileStatus('success');
 				} else {
-					//step.addClass('error');
-					//step.find('p.result').text(xhr.responseText).slideDown();
+					_self.data('step').find('div.ribbon').fileStatus('error');
 				}
 			}
 		}
@@ -141,32 +138,9 @@ $(function() {
 		} else {
 			$('div.step:eq(0) input[name="overwrite"]').removeAttr('disabled').attr('checked','checked');
 			$('button[name="upload"]').removeClass('disabled').removeAttr('disabled');
-			button.data('loading').fadeOut('slow');
+			_self.data('loading').fadeOut('slow');
 		}
 		
-    	
-		/*
-		$.ajax({
-			type: 'POST',
-			url: 'tasks.php',
-			dataType: 'json',
-			data: {
-				'f': 'upload',
-				'overwrite': (button.data('overwrite').is(':checked') == true) ? true : undefined,
-				'file': 'foo.zip',
-				'target': 'tbd'
-			},
-			beforeSend: function(){
-				button.data('loading').fadeIn('slow');
-			},
-			success: function(json){
-				button.data('loading').fadeOut('slow');
-			},
-			error: function(error){
-				button.data('loading').fadeOut('slow');
-			}
-		});
-		*/
 	});
 	
 	///////////////////////////////////////////////////////
@@ -180,7 +154,7 @@ $(function() {
     });
     
     $('button[name="target"]').click( function(){
-    	var button = $(this);
+    	var _self = $(this);
     	$.ajax({
 			type: 'POST',
 			url: 'tasks.php',
@@ -193,7 +167,7 @@ $(function() {
 				$.each(json.targets, function(key, target){
 					$('<li>').text(target).prepend('<img src="images/folder_16.png" />').click( function(){
 						$('form').data('target', key);
-						button.data('text').text(target);
+						_self.data('text').text(target);
 						$(this).parents('div.popup-list').fadeOut( function(){
 		                    $(this).prev('div.popup-back').fadeOut('fast');
 		                });
@@ -204,8 +178,8 @@ $(function() {
 		        });				
 			},
 			error: function(error){
-				button.data('icon').attr('src', 'images/warning_16.png');
-				button.data('text').text(error.responseText);
+				_self.data('icon').attr('src', 'images/warning_16.png');
+				_self.data('text').text(error.responseText);
 			}
 		});
     });
@@ -218,7 +192,7 @@ $(function() {
     });
     
     $('button[name="select"]').click( function(){
-    	var button = $(this);
+    	var _self = $(this);
     	$.ajax({
 			type: 'POST',
 			url: 'tasks.php',
@@ -231,7 +205,7 @@ $(function() {
 				$.each(json.selects, function(key, select){
 					$('<li>').text(select).prepend('<img src="images/document_16.png" />').click( function(){
 						$('form').data('select', select);
-						button.data('text').text(select);
+						_self.data('text').text(select);
 						$(this).parents('div.popup-list').fadeOut( function(){
 		                    $(this).prev('div.popup-back').fadeOut('fast');
 		                });
@@ -242,8 +216,8 @@ $(function() {
 		        });				
 			},
 			error: function(error){
-				button.data('icon').attr('src', 'images/warning_16.png');
-				button.data('text').text(error.responseText);
+				_self.data('icon').attr('src', 'images/warning_16.png');
+				_self.data('text').text(error.responseText);
 			}
 		});
     });
@@ -260,7 +234,7 @@ $(function() {
     });
     
     $('button[name="purge"]').click( function(e){
-    	var button = $(this);
+    	var _self = $(this);
 		$.ajax({
 			type: 'POST',
 			url: 'tasks.php',
@@ -270,17 +244,17 @@ $(function() {
 				'target': $('form').data('target')
 			},
 			beforeSend: function(){
-				button.data('loading').fadeIn('slow');
+				_self.data('loading').fadeIn('slow');
 			},
 			success: function(json){
-				button.data('loading').fadeOut('slow');
-				button.data('icon').attr('src', 'images/tick_16.png');
-				button.data('text').text('Directory Purged');
+				_self.data('loading').fadeOut('slow');
+				_self.data('icon').attr('src', 'images/tick_16.png');
+				_self.data('text').text('Directory Purged');
 			},
 			error: function(error){
-				button.data('loading').fadeOut('slow');
-				button.data('icon').attr('src', 'images/warning_16.png');
-				button.data('text').text(error.responseText);
+				_self.data('loading').fadeOut('slow');
+				_self.data('icon').attr('src', 'images/warning_16.png');
+				_self.data('text').text(error.responseText);
 			}
 		});
 	});
@@ -294,7 +268,7 @@ $(function() {
     });
     
     $('button[name="extract"]').click( function(e){
-    	var button = $(this);
+    	var _self = $(this);
 		$.ajax({
 			type: 'POST',
 			url: 'tasks.php',
@@ -305,17 +279,17 @@ $(function() {
 				'file': $('form').data('select')
 			},
 			beforeSend: function(){
-				button.data('loading').fadeIn('slow');
+				_self.data('loading').fadeIn('slow');
 			},
 			success: function(json){
-				button.data('loading').fadeOut('slow');
-				button.data('icon').attr('src', 'images/tick_16.png');
-				button.data('text').text(json.result);
+				_self.data('loading').fadeOut('slow');
+				_self.data('icon').attr('src', 'images/tick_16.png');
+				_self.data('text').text(json.result);
 			},
 			error: function(error){
-				button.data('loading').fadeOut('slow');
-				button.data('icon').attr('src', 'images/warning_16.png');
-				button.data('text').text(error.responseText);
+				_self.data('loading').fadeOut('slow');
+				_self.data('icon').attr('src', 'images/warning_16.png');
+				_self.data('text').text(error.responseText);
 			}
 		});
 	});
@@ -349,8 +323,9 @@ $(function() {
 				var file = $(this).parents('div.step').data('files')[0];
 				if(file){
 					$(this).removeClass('error').addClass('status success').find('img').attr('src', 'images/file_16.png').next('span.text').html( function(){
-						return subName(file.name) + ' ' + '<span style="float: right;">[' + size_format(file.size) + ']</span>';
+						return subName(file.name);
 					});
+					$(this).find('sup').text(size_format(file.size));
 					//$(this).find('div.bottom button[name="upload"]').removeClass('disabled').removeAttr('disabled');
 				}
 			},
@@ -359,6 +334,7 @@ $(function() {
 				//if( options ){ $.extend( settings, options ); }
 				$(this).parents('div.step').data('files', null);
 				$(this).removeClass('error success').addClass('status').find('img').attr('src', 'images/file_16.png').next('span.text').text('Drop file here.');
+				$(this).find('sup').text('');
 			},
 			
 			nomore: function(){
@@ -371,6 +347,16 @@ $(function() {
 				//if( options ){ $.extend( settings, options ); }
 				$(this).parents('div.step').data('files', null);
 				$(this).removeClass('success').addClass('error').find('img').attr('src', 'images/warning_16.png').next('span.text').text('File already dropped.');
+			},
+			
+			error: function(){
+				$(this).parents('div.step').data('files', null);
+				$(this).removeClass('success').addClass('error').find('img').attr('src', 'images/warning_16.png').next('span.text').text('Upload error.');
+			},
+			
+			success: function(){
+				$(this).parents('div.step').data('files', null);
+				$(this).removeClass('error').addClass('success').find('img').attr('src', 'images/tick_16.png').next('span.text').text('Upload successful.');
 			}
 		};
 		

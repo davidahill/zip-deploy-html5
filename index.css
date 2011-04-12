@@ -277,6 +277,13 @@ img.loading {
 	margin-left: 10px;
 }
 
+div.step sup.filesize {
+	font-weight: bold;
+	line-height: 30px;
+	position: relative;
+	float: right;
+}
+
 /* Step 2 -- Popup */
 div.popup-back {
     background-color: #666;
