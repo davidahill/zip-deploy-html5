@@ -1,0 +1,466 @@
+/*	Less Framework 4
+	http://lessframework.com
+	by Joni Korpi
+	License: http://opensource.org/licenses/mit-license.php	*/
+
+
+/*	Resets
+	------	*/
+
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, 
+p, blockquote, pre, a, abbr, address, cite, code, del, dfn, em, 
+img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, hr, 
+dl, dt, dd, ol, ul, li, fieldset, form, label, legend, 
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figure, figcaption, hgroup, 
+menu, footer, header, nav, section, summary, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+article, aside, canvas, figure, figure img, figcaption, hgroup,
+footer, header, nav, section, audio, video {
+	display: block;
+}
+
+a img {border: 0;}
+
+
+
+/*	Typography presets
+	------------------	*/
+
+.gigantic {
+	font-size: 110px;
+	line-height: 120px;
+	letter-spacing: -2px;
+}
+
+.huge, h1 {
+	font-size: 68px;
+	line-height: 72px;
+	letter-spacing: -1px;
+}
+
+.large, h2 {
+	font-size: 42px;
+	line-height: 48px;
+}
+
+.bigger, h3 {
+	font-size: 26px;
+	line-height: 36px;
+}
+
+.big, h4 {
+	font-size: 22px;
+	line-height: 30px;
+}
+
+body {
+	font: 16px/24px Georgia, serif;
+}
+
+.small, small {
+	font-size: 13px;
+	line-height: 18px;
+}
+
+/* Selection colours (easy to forget) */
+
+::selection 	 	{background: rgb(255,255,158);}
+::-moz-selection 	{background: rgb(255,255,158);}
+img::selection 		{background: transparent;}
+img::-moz-selection	{background: transparent;}
+body {-webkit-tap-highlight-color: rgb(255,255,158);}
+
+
+
+/*		Default Layout: 992px. 
+		Gutters: 24px.
+		Outer margins: 48px.
+		Leftover space for scrollbars @1024px: 32px.
+-------------------------------------------------------------------------------
+cols    1     2      3      4      5      6      7      8      9      10
+px      68    160    252    344    436    528    620    712    804    896    */
+
+body {
+	width: 896px;
+	padding: 72px 48px 84px;
+	background: rgb(237, 237, 236);
+	color: rgb(60,60,60);
+	-webkit-text-size-adjust: 100%; /* Stops Mobile Safari from auto-adjusting font-sizes */
+	margin: 0 auto;
+}
+
+section, header, article, footer {
+	display: block;
+}
+
+input {
+	padding: 3px;
+	border: 1px solid #999;
+	cursor: pointer;
+}
+
+button {
+	background-color: #FFF;
+	color: #5C5C5C;
+	padding: 5px 5px;
+	cursor: pointer;
+	font-weight: bold;
+
+	border: 1px solid #999;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	
+	box-shadow: 0 0 3px #999;
+	-o-box-shadow: 0 0 3px #999;
+	-webkit-box-shadow: 0 0 3px #999;
+	-moz-box-shadow: 0 0 3px #999;
+}
+
+button:hover {
+	background-color: #F9F9F9;
+	border: 1px solid #666;
+	color: #333;
+	
+	box-shadow: inset 0 1px 5px #CBE6F2, inset 0 -15px #F9F9F9;
+	-o-box-shadow: inset 0 1px 5px #CBE6F2, inset 0 -15px #F9F9F9;
+	-webkit-box-shadow: inset 0 1px 5px #CBE6F2, inset 0 -15px #F9F9F9;
+	-moz-box-shadow: inset 0 1px 5px #CBE6F2, inset 0 -15px #F9F9F9;
+}
+
+button.disabled {
+	background-color: #F9F9F9;
+	color: #CCC;
+	border: 1px solid #999;
+	cursor: auto;
+	
+	box-shadow: none;
+	-o-box-shadow: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+}
+
+div.step {
+	width: 250px;
+	height: 300px;
+	float: left;
+	margin: 20px;
+	z-index: 1000;
+	
+	padding: 0px;
+	overflow: hidden;
+	background-color: #FFF;
+	position: relative;
+	
+	border: 2px solid #666;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	
+	box-shadow: 0px 0px 10px #999;
+	-o-box-shadow: 0px 0px 10px #999;
+	-webkit-box-shadow: 0px 0px 10px #999;
+	-moz-box-shadow: 0px 0px 10px #999;
+}
+
+div.step.green {
+	box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #BEE6C0;
+	-o-box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #BEE6C0;
+	-webkit-box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #BEE6C0;
+	-moz-box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #BEE6C0;
+}
+
+div.step.red {
+	box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #F3D8D8;
+	-o-box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #F3D8D8;
+	-webkit-box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #F3D8D8;
+	-moz-box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #F3D8D8;
+}
+
+div.step:hover, div.step.blue {
+	box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #CBE6F2;
+	-o-box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #CBE6F2;
+	-webkit-box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #CBE6F2;
+	-moz-box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #CBE6F2;
+}
+
+
+div.step > div.top {
+	height: 50px;
+	overflow: hidden;
+	background-color: #FFF;
+    
+    border-radius: 5px 5px 0px 0px;
+    -moz-border-radius: 5px 5px 0px 0px;
+	
+	box-shadow: 0px 0px 4px #666;
+	-o-box-shadow: 0px 0px 4px #666;
+	-webkit-box-shadow: 0px 0px 4px #666;
+	-moz-box-shadow: 0px 0px 4px #666;
+	
+	line-height: 50px;
+	font-size: 20px;
+	padding-left: 10px;
+	color: #333;
+}
+
+div.step > div.top > sup {
+	font-size: 85px;
+	font-weight: bold;
+	line-height: 50px;
+	position: relative;
+	margin-right: 10px;
+	float: right;
+	color: #DEDEDE;
+	text-shadow: 0px 1px 1px #666;
+}
+
+div.step > div.bottom {
+	margin: 15px;
+}
+
+div.step > div.bottom > h2 {
+	font-size: 14px;
+	line-height: 16px;
+	color: #666;
+	margin-bottom: 10px;
+}
+
+div.step > div.bottom > h2 > img.loading {
+	position: relative;
+	float: right;
+}
+
+div.step > div.bottom > div {
+    clear: both;   
+}
+
+div.step > div.bottom > div.ribbon {
+	background-color: #F0EEAF;
+	margin: 15px -15px 10px -15px;
+	padding: 7px 15px;
+	
+	box-shadow: 0 0px 4px #666;
+	-o-box-shadow: 0 0px 4px #666;
+	-webkit-box-shadow: 0 0px 4px #666;
+	-moz-box-shadow: 0 0px 4px #666;
+}
+
+div.step > div.bottom > div.ribbon > img {
+	margin-right: 7px;
+	vertical-align: middle;
+	
+}
+
+div.step > div.bottom > div.ribbon > span.text {
+	margin-right: 10px;
+	line-height: 30px;
+	height: 30px;
+	display: inline-block;
+	color: #333;
+}
+
+div.step > div.bottom > div.ribbon > button {
+	float: right;
+}
+
+div.step > div.bottom > div.ribbon.error {
+	background-color: #F3D8D8;
+}
+
+div.step > div.bottom > div.ribbon.success {
+	background-color: #BEE6C0;
+}
+
+div.step > div.bottom > div.ribbon.success > img {
+	cursor: pointer;
+}
+
+div.step > div.bottom > p.or {
+    margin: 20px;
+    border-top: 1px solid #CCC;
+    position: relative;
+}
+
+div.step > div.bottom > p.or > sup {
+    font-size: 8px;
+    font-weight: bold;
+    position: absolute;
+    top: -5px;
+    left: 79px;
+    background-color: #FFF;
+    padding: 0px 5px;
+    color: #666;
+}
+
+div.step > div.bottom > p.browse {
+    background-color: #F0EEAF;
+	margin: 15px -15px 10px -15px;
+    padding: 0px;
+	line-height: 30px;
+	color: #333;
+	
+	box-shadow: 0 0px 4px #666;
+	-o-box-shadow: 0 0px 4px #666;
+	-webkit-box-shadow: 0 0px 4px #666;
+	-moz-box-shadow: 0 0px 4px #666;
+}
+
+div.step > div.bottom > p.browse > sup {
+    position: absolute;
+    left: 15px;
+    line-height: 30px;
+    z-index: 1010;
+    cursor: pointer;
+}
+
+div.step > div.bottom > p.browse > sup > img {
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+div.step > div.bottom > p.browse > input[type="file"] {
+    margin: 0px;
+    position: relaitve;
+    opacity: 0;
+    z-index: 1020;
+    height: 30px;
+    width: 250px;
+}
+
+img.loading {
+    display: none;
+}
+
+/* Step 1 -- */
+#upload {
+	font-size: 12px;
+    color: #666;
+    font-weight: bold;
+}
+
+#upload > input[name="overwrite"] {
+	margin: 0px 5px 3px 0px;
+    vertical-align: middle;
+}
+
+#upload > button[name="upload"] {
+	margin-left: 10px;
+}
+
+/* Step 2 -- Popup */
+div.popup-back {
+    background-color: #666;
+    opacity: .8;
+    color: #FFF;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1500;
+    display: none;
+}
+
+div.popup-list {
+    margin: 10px;
+    background-color: #FFF;
+    position: absolute;
+    width: 226px;
+    max-height: 276px;
+    z-index: 1600;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border: 2px solid #666;
+    display: none;
+}
+
+div.popup-list > div.top {
+    height: 26px;
+    line-height: 26px;
+    padding: 5px;
+    background-color: #F0EEAF;
+    color: #333;
+    cursor: pointer;
+    
+    box-shadow: 0 0px 4px #666;
+	-o-box-shadow: 0 0px 4px #666;
+	-webkit-box-shadow: 0 0px 4px #666;
+	-moz-box-shadow: 0 0px 4px #666;
+}
+
+div.popup-list > div.top > img {
+    margin: 0px 10px 0px 7px;
+    vertical-align: middle;   
+}
+
+div.popup-list > div.bottom > ul {
+    list-style-type: none;
+    margin: 5px 0px;
+}
+
+div.popup-list > div.bottom > ul > li {
+	padding: 5px 10px;
+    line-height: 16px;
+    cursor: pointer;
+}
+
+div.popup-list > div.bottom > ul > li > img {
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+/*		Tablet Layout: 768px.
+		Gutters: 24px.
+		Outer margins: 28px.
+		Inherits styles from: Default Layout.
+-----------------------------------------------------------------
+cols    1     2      3      4      5      6      7      8
+px      68    160    252    344    436    528    620    712    */
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+	
+	body {
+		width: 712px;
+		padding: 48px 28px 60px;
+	}
+}
+
+
+
+/*		Mobile Layout: 320px.
+		Gutters: 24px.
+		Outer margins: 34px.
+		Inherits styles from: Default Layout.
+---------------------------------------------
+cols    1     2      3
+px      68    160    252    */
+
+@media only screen and (max-width: 767px) {
+	
+	body {
+		width: 252px;
+		padding: 48px 34px 60px;
+	}
+	
+}
+
+
+
+/*		Wide Mobile Layout: 480px.
+		Gutters: 24px.
+		Outer margins: 22px.
+		Inherits styles from: Default Layout, Mobile Layout.
+------------------------------------------------------------
+cols    1     2      3      4      5
+px      68    160    252    344    436    */
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+	
+	body {
+		width: 436px;
+		padding: 36px 22px 48px;
+	}
+	
+}
