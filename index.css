@@ -1,10 +1,247 @@
+/*	Less Framework 4
+	http://lessframework.com
+	by Joni Korpi
+	License: http://opensource.org/licenses/mit-license.php	*/
+
+
+/*	Resets
+	------	*/
+
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, 
+p, blockquote, pre, a, abbr, address, cite, code, del, dfn, em, 
+img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, hr, 
+dl, dt, dd, ol, ul, li, fieldset, form, label, legend, 
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figure, figcaption, hgroup, 
+menu, footer, header, nav, section, summary, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+article, aside, canvas, figure, figure img, figcaption, hgroup,
+footer, header, nav, section, audio, video {
+	display: block;
+}
+
+a img {border: 0;}
+
+/*	Typography presets
+	------------------	*/
+
+.gigantic {
+	font-size: 110px;
+	line-height: 120px;
+	letter-spacing: -2px;
+}
+
+.huge, h1 {
+	font-size: 68px;
+	line-height: 72px;
+	letter-spacing: -1px;
+}
+
+.large, h2 {
+	font-size: 42px;
+	line-height: 48px;
+}
+
+.bigger, h3 {
+	font-size: 26px;
+	line-height: 36px;
+}
+
+.big, h4 {
+	font-size: 22px;
+	line-height: 30px;
+}
+
 body { 
 	font: normal 12px Helvetica, sans-serif;
+}
+
+.small, small {
+	font-size: 13px;
+	line-height: 18px;
+}
+
+/* Selection colours (easy to forget) */
+
+::selection 	 	{background: rgb(255,255,158);}
+::-moz-selection 	{background: rgb(255,255,158);}
+img::selection 		{background: transparent;}
+img::-moz-selection	{background: transparent;}
+body {-webkit-tap-highlight-color: rgb(255,255,158);}
+
+
+/*		Default Layout: 992px. 
+		Gutters: 24px.
+		Outer margins: 48px.
+		Leftover space for scrollbars @1024px: 32px.
+-------------------------------------------------------------------------------
+cols    1     2      3      4      5      6      7      8      9      10
+px      68    160    252    344    436    528    620    712    804    896    */
+
+body {
+	width: 896px;
+	padding: 72px 48px 84px;
 	background: rgb(237, 237, 236);
-	margin: 50px 0;
-	padding: 0;
-	overflow-y: scroll;
-	height: 100%;
+	color: rgb(60,60,60);
+	-webkit-text-size-adjust: 100%; /* Stops Mobile Safari from auto-adjusting font-sizes */
+	margin: 0 auto;
+}
+
+div.step {
+	width: 250px;
+	height: 300px;
+	float: left;
+	margin-right: 20px;
+	z-index: 1000;
+	
+	padding: 0px;
+	overflow: hidden;
+	background-color: #FFF;
+	position: relative;
+	
+	border: 2px solid #666;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	
+	box-shadow: 0px 0px 10px #999;
+	-o-box-shadow: 0px 0px 10px #999;
+	-webkit-box-shadow: 0px 0px 10px #999;
+	-moz-box-shadow: 0px 0px 10px #999;
+}
+
+div.step > div.top {
+	height: 50px;
+	overflow: hidden;
+	background-color: #FFF;
+    
+    border-radius: 5px 5px 0px 0px;
+    -moz-border-radius: 5px 5px 0px 0px;
+	
+	box-shadow: 0px 0px 4px #666;
+	-o-box-shadow: 0px 0px 4px #666;
+	-webkit-box-shadow: 0px 0px 4px #666;
+	-moz-box-shadow: 0px 0px 4px #666;
+	
+	line-height: 50px;
+	font-size: 20px;
+	padding-left: 10px;
+	color: #333;
+}
+
+div.step > div.top > sup {
+	font-size: 85px;
+	font-weight: bold;
+	line-height: 50px;
+	position: relative;
+	margin-right: 10px;
+	float: right;
+	color: #DEDEDE;
+	text-shadow: 0px 1px 1px #666;
+}
+
+div.step > div.bottom > p.or {
+    margin: 20px;
+    border-top: 1px solid #CCC;
+    position: relative;
+}
+
+div.step > div.bottom > p.or > sup {
+    font-size: 8px;
+    font-weight: bold;
+    position: absolute;
+    top: -5px;
+    left: 79px;
+    background-color: #FFF;
+    padding: 0px 5px;
+    color: #666;
+}
+
+/*		Tablet Layout: 768px.
+		Gutters: 24px.
+		Outer margins: 28px.
+		Inherits styles from: Default Layout.
+-----------------------------------------------------------------
+cols    1     2      3      4      5      6      7      8
+px      68    160    252    344    436    528    620    712    */
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+	
+	body {
+		width: 712px;
+		padding: 48px 28px 60px;
+	}
+	
+	div.step {
+		width: 100%;
+		margin: 0px;
+		margin-bottom: 20px;
+	}
+	
+	div.step > div.bottom > p.or > sup {
+	    left: 48%;
+	}
+}
+
+
+/*		Mobile Layout: 320px.
+		Gutters: 24px.
+		Outer margins: 34px.
+		Inherits styles from: Default Layout.
+---------------------------------------------
+cols    1     2      3
+px      68    160    252    */
+
+@media only screen and (max-width: 767px) {
+	
+	body {
+		width: 252px;
+		width: 100%;
+		padding: 48px 34px 60px;
+		padding: 48px 0px 60px;
+	}
+	
+	div.step {
+		width: 100%;
+		margin: 0px;
+		margin-bottom: 20px;
+		
+		border-left: none;
+		border-right: none;
+		-moz-border-radius: 0px;
+	}
+	
+	div.step > div.top {
+		-moz-border-radius: 0px;
+	}
+	
+	div.step > div.bottom > p.or > sup {
+	    left: 48%;
+	}
+	
+}
+
+
+/*		Wide Mobile Layout: 480px.
+		Gutters: 24px.
+		Outer margins: 22px.
+		Inherits styles from: Default Layout, Mobile Layout.
+------------------------------------------------------------
+cols    1     2      3      4      5
+px      68    160    252    344    436    */
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+	
+	body {
+		width: 436px;
+		width: 100%;
+		padding: 36px 22px 48px;
+		padding: 36px 0px 48px;
+	}
+	
 }
 
 section, header, article, footer {
@@ -67,29 +304,7 @@ div.fileCatch {
 
 form.container {
 	margin: 0px auto;
-	width: 886px;
-}
-
-div.step {
-	width: 250px;
-	height: 300px;
-	float: left;
-	margin: 20px;
-	z-index: 1000;
-	
-	padding: 0px;
-	overflow: hidden;
-	background-color: #FFF;
-	position: relative;
-	
-	border: 2px solid #666;
-	border-radius: 5px;
-	-moz-border-radius: 5px;
-	
-	box-shadow: 0px 0px 10px #999;
-	-o-box-shadow: 0px 0px 10px #999;
-	-webkit-box-shadow: 0px 0px 10px #999;
-	-moz-box-shadow: 0px 0px 10px #999;
+	width: 100%;
 }
 
 div.step.green {
@@ -111,37 +326,6 @@ div.step:hover, div.step.blue {
 	-o-box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #CBE6F2;
 	-webkit-box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #CBE6F2;
 	-moz-box-shadow: 0px 0px 10px #999, inset 0px 0px 50px #CBE6F2;
-}
-
-
-div.step > div.top {
-	height: 50px;
-	overflow: hidden;
-	background-color: #FFF;
-    
-    border-radius: 5px 5px 0px 0px;
-    -moz-border-radius: 5px 5px 0px 0px;
-	
-	box-shadow: 0px 0px 4px #666;
-	-o-box-shadow: 0px 0px 4px #666;
-	-webkit-box-shadow: 0px 0px 4px #666;
-	-moz-box-shadow: 0px 0px 4px #666;
-	
-	line-height: 50px;
-	font-size: 20px;
-	padding-left: 10px;
-	color: #333;
-}
-
-div.step > div.top > sup {
-	font-size: 85px;
-	font-weight: bold;
-	line-height: 50px;
-	position: relative;
-	margin-right: 10px;
-	float: right;
-	color: #DEDEDE;
-	text-shadow: 0px 1px 1px #666;
 }
 
 div.step > div.bottom {
@@ -205,23 +389,6 @@ div.step > div.bottom > div.ribbon.success > img {
 	cursor: pointer;
 }
 
-div.step > div.bottom > p.or {
-    margin: 20px;
-    border-top: 1px solid #CCC;
-    position: relative;
-}
-
-div.step > div.bottom > p.or > sup {
-    font-size: 8px;
-    font-weight: bold;
-    position: absolute;
-    top: -5px;
-    left: 79px;
-    background-color: #FFF;
-    padding: 0px 5px;
-    color: #666;
-}
-
 div.step > div.bottom > p.browse {
     background-color: #F0EEAF;
 	margin: 15px -15px 10px -15px;
@@ -258,7 +425,7 @@ div.step > div.bottom > p.browse > input[type="file"] {
 }
 
 img.loading {
-    display: none;    
+    display: none;
 }
 
 /* Step 1 -- */
@@ -290,15 +457,14 @@ div.popup-back {
 }
 
 div.popup-list {
-    margin: 10px;
     background-color: #FFF;
     position: absolute;
-    width: 226px;
+    width: 100%;
     max-height: 276px;
     z-index: 1600;
     overflow-y: auto;
     overflow-x: hidden;
-    border: 2px solid #666;
+    border-bottom: 2px solid #666;
     display: none;
 }
 
@@ -335,40 +501,4 @@ div.popup-list > div.bottom > ul > li {
 div.popup-list > div.bottom > ul > li > img {
     vertical-align: middle;
     margin-right: 10px;
-}
-
-/* Step Separator */
-
-form.container > div.or {
-	width: 1px;
-	height: 200px;
-	float: left;
-	margin: 82px 0px;
-	z-index: 1000;
-	padding: 0px;
-	position: relative;
-	border-left: 1px solid #999;
-}
-
-form.container > div.or > sup {
-	font-size: 8px;
-    font-weight: bold;
-    position: absolute;
-    background-color: #EDEDEC;
-    padding: 0px 5px;
-    color: #333;
-    z-index: 1005;
-    width: 35px;
-    left: -22px;
-    top: 98px;
-    -webkit-transform: rotate(-90deg); 
-	-moz-transform: rotate(-90deg);	
-}
-
-.clearfix:after {
-	content: ".";
-	display: block;
-	height: 0;
-	clear: both;
-	visibility: hidden;
 }

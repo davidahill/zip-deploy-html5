@@ -1,86 +1,92 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-	<title>Deploy Zip</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
-	<script src="jquery.filedragdrop.js"></script>
-	<script src="index.js"></script>
-	<link type="text/css" href="reset.css" rel="stylesheet" />
-	<link type="text/css" href="index.css" rel="stylesheet" />
-</head>
-<body>
-	<div class="fileCatch"></div>
-	<form class="container">
-		<div class="step drop">
-			<div class="top">Upload<sup>1</sup></div>
-			<div class="bottom">
-				<h2>Browse or Drop File <img class="loading" src="images/loading.gif" /></h2>
-				<div class="ribbon">
-					<img src="images/file_16.png" />
-					<span class="text">Drop file here.</span>
-				</div>
-                <p class="browse">
-                	<input type="file" name="files" />
-                	<sup><img src="images/file_16.png" /><span>Click to browse.</span></sup>
-                </p>
-				<div id="upload" style="text-align: right; margin-top: 15px;">
-					<input name="overwrite" type="checkbox" checked>Overwrite?
-					<button name="upload" type="button" class="" >Upload</button>
+
+	<head>
+		<meta charset="utf-8"/>
+		<title>Less Test</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+		<script src="jquery.filedragdrop.js"></script>
+		<script src="index.js"></script>
+		<!--[if lt IE 9]>
+			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		<link rel="stylesheet" media="all" href="less.css"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<!-- Adding "maximum-scale=1" fixes the Mobile Safari auto-zoom bug: http://filamentgroup.com/examples/iosScaleBug/ -->
+	</head>
+	
+	<body lang="en">
+		<form class="container">
+			<div class="step drop">
+				<div class="top">Upload<sup>1</sup></div>
+				<div class="bottom">
+					<h2>Browse or Drop File <img class="loading" src="images/loading.gif" /></h2>
+					<div class="ribbon">
+						<img src="images/file_16.png" />
+						<span class="text">Drop file here.</span>
+					</div>
+	                <p class="browse">
+	                	<input type="file" name="files" />
+	                	<sup><img src="images/file_16.png" /><span>Click to browse.</span></sup>
+	                </p>
+					<div id="upload" style="text-align: right; margin-top: 15px;">
+						<input name="overwrite" type="checkbox" checked>Overwrite?
+						<button name="upload" type="button" class="" >Upload</button>
+					</div>
 				</div>
 			</div>
-		</div>
+			
+			<!-- <div class="or"><sup>AND / OR</sup></div> //-->
 		
-		<!-- <div class="or"><sup>AND / OR</sup></div> //-->
-		
-		<div class="step nodrop">
-            <div class="popup-back"></div>
-            <div class="popup-list">
-                <div class="top">
-                    <img src="images/delete_16.png" />Cancel
-                </div>
-                <div class="bottom">
-                    <ul></ul>
-                </div>
-            </div>
-			<div class="top">Select &amp; Target<sup>2</sup></div>
-			<div class="bottom">
-				<h2>Select Target</h2>
-				<div class="ribbon" style="">
-					<img src="images/folder_16.png" />
-					<span class="text">&nbsp;</span>
-					<button name="target" type="button">Browse</button>
+			<div class="step nodrop">
+	            <div class="popup-back"></div>
+	            <div class="popup-list">
+	                <div class="top">
+	                    <img src="images/delete_16.png" />Cancel
+	                </div>
+	                <div class="bottom">
+	                    <ul></ul>
+	                </div>
+	            </div>
+				<div class="top">Select &amp; Target<sup>2</sup></div>
+				<div class="bottom">
+					<h2>Select Target</h2>
+					<div class="ribbon" style="">
+						<img src="images/folder_16.png" />
+						<span class="text">&nbsp;</span>
+						<button name="target" type="button">Browse</button>
+					</div>
+	                <p class="or"><sup>AND</sup></p>
+	                <h2>Select File</h2>
+	                <div class="ribbon" style="">
+	                	<img src="images/document_16.png" />
+	                	<span class="text">&nbsp;</span>
+	                	<button name="select" type="button" style="">Browse</button>
+	                </div>
 				</div>
-                <p class="or"><sup>AND</sup></p>
-                <h2>Select File</h2>
-                <div class="ribbon" style="">
-                	<img src="images/document_16.png" />
-                	<span class="text">&nbsp;</span>
-                	<button name="select" type="button" style="">Browse</button>
-                </div>
 			</div>
-		</div>
-		
-		<!-- <div class="or"><sup style="width: 17px; left: -15px; top: 92px;">AND</sup></div> //-->
-		
-		<div class="step nodrop">
-			<div class="top">Purge &amp; Extract<sup>3</sup></div>
-			<div class="bottom">
-				<h2>Purge <img class="loading" src="images/loading.gif" /></h2>
-                <div class="ribbon">
-                	<img src="images/trash_16.png" />
-                	<span class="text">&nbsp;</span>
-                	<button name="purge" type="button" style="">Go</button>
-                </div>
-                <p class="or"><sup style="left: 68px;">AND / OR</sup></p>
-                <h2>Extract <img class="loading" src="images/loading.gif" /></h2>
-                <div class="ribbon">
-               		<img src="images/down_16.png" />
-               		<span class="text">&nbsp;</span>
-               		<button name="extract" type="button" style="">Go</button>
-               	</div>
+			
+			<!-- <div class="or"><sup style="width: 17px; left: -15px; top: 92px;">AND</sup></div> //-->
+			
+			<div class="step nodrop">
+				<div class="top">Purge &amp; Extract<sup>3</sup></div>
+				<div class="bottom">
+					<h2>Purge <img class="loading" src="images/loading.gif" /></h2>
+	                <div class="ribbon">
+	                	<img src="images/trash_16.png" />
+	                	<span class="text">&nbsp;</span>
+	                	<button name="purge" type="button" style="">Go</button>
+	                </div>
+	                <p class="or"><sup>AND</sup></p>
+	                <h2>Extract <img class="loading" src="images/loading.gif" /></h2>
+	                <div class="ribbon">
+	               		<img src="images/down_16.png" />
+	               		<span class="text">&nbsp;</span>
+	               		<button name="extract" type="button" style="">Go</button>
+	               	</div>
+				</div>
 			</div>
-		</div>
-		
-	</form>
-</body>
+		</form>
+	</body>
+	
 </html>
