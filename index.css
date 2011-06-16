@@ -300,6 +300,7 @@ div.fileCatch {
 	top: 0;
 	width: 100%;
 	z-index: 500;
+	left: 0;
 }
 
 form.container {
