@@ -12,4 +12,6 @@ if(!is_dir($uploaddir)){
     mkdir($uploaddir, 0644);
 }
 
+Header( "Location: /" );
+
 ?>

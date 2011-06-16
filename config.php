@@ -8,5 +8,4 @@ $targets = array(
 
 $uploaddir = './uploads/';
 
-Header( "Location: /" ); 
 ?>
